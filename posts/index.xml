@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on Welcome ~</title>
-    <link>https://khar34.github.io/posts/</link>
+    <link>http://localhost:1313/posts/</link>
     <description>Recent content in Posts on Welcome ~</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 09 Nov 2024 16:39:14 +0700</lastBuildDate>
-    <atom:link href="https://khar34.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>First post ever :D</title>
-      <link>https://khar34.github.io/posts/welcome/</link>
+      <link>http://localhost:1313/posts/en/welcome/</link>
       <pubDate>Sat, 09 Nov 2024 16:39:14 +0700</pubDate>
-      <guid>https://khar34.github.io/posts/welcome/</guid>
+      <guid>http://localhost:1313/posts/en/welcome/</guid>
       <description>&lt;p&gt;Hello people, I will be sharing my thoughts and experiences here, feel free to read!.&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://images-ext-1.discordapp.net/external/6OMdyV5E0-Te3Ic1r2JdZDs0I4_l-wvvZKxFXJzqm7M/https/i.pinimg.com/originals/b4/8a/74/b48a7481e3e8a215a31d92a3ab4f2865.jpg?format=webp&amp;amp;width=662&amp;amp;height=632&#34; alt=&#34;Alt text&#34; title=&#34;car&#34;&gt;&lt;/p&gt;</description>
     </item>
   </channel>
