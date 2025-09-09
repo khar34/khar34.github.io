@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Go on Pham Hoang Tuan Kha</title>
+    <link>http://localhost:1313/tags/go/</link>
+    <description>Recent content in Go on Pham Hoang Tuan Kha</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 31 Aug 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/go/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>My Cool Project</title>
+      <link>http://localhost:1313/works/test/</link>
+      <pubDate>Sun, 31 Aug 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/works/test/</guid>
+      <description>&lt;h3 class=&#34;heading&#34; id=&#34;overview&#34;&gt;&#xA;  Overview&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#overview&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h3&gt;&#xA;&lt;p&gt;This is a project I built using Hugo and Go&amp;hellip;&lt;/p&gt;&#xA;&lt;h3 class=&#34;heading&#34; id=&#34;features&#34;&gt;&#xA;  Features&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#features&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Fast and responsive&lt;/li&gt;&#xA;&lt;li&gt;Markdown-based&lt;/li&gt;&#xA;&lt;li&gt;Easy deployment&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 class=&#34;heading&#34; id=&#34;links&#34;&gt;&#xA;  Links&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#links&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://project-demo.vercel.app&#34;&gt;View Demo&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://github.com/username/project&#34;&gt;Source Code&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+    </item>
+  </channel>
+</rss>
