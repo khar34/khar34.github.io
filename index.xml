@@ -16,11 +16,25 @@
       <description>&lt;p&gt;this is some content&lt;/p&gt;</description>
     </item>
     <item>
-      <title>Zein IDE - A Theia-based Development Environment</title>
+      <title>Hutech IDE</title>
+      <link>https://khar34.github.io/works/hutech-ide/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://khar34.github.io/works/hutech-ide/</guid>
+      <description>A lightweight fork of Zein IDE for programming learning students</description>
+    </item>
+    <item>
+      <title>Zein IDE</title>
       <link>https://khar34.github.io/works/zein-ide/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://khar34.github.io/works/zein-ide/</guid>
       <description>A customizable development environment built on Eclipse Theia.</description>
+    </item>
+    <item>
+      <title>Zein Team Planner</title>
+      <link>https://khar34.github.io/works/zein-team-planner/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://khar34.github.io/works/zein-team-planner/</guid>
+      <description>A simple and visual task management application</description>
     </item>
   </channel>
 </rss>
