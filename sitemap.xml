@@ -2,40 +2,19 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://khar34.github.io/tags/eclipse/</loc>
-    <lastmod>2025-08-31T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://khar34.github.io/</loc>
-    <lastmod>2025-08-31T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://khar34.github.io/tags/ide/</loc>
-    <lastmod>2025-08-31T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://khar34.github.io/tags/java/</loc>
-    <lastmod>2025-08-31T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://khar34.github.io/tags/</loc>
-    <lastmod>2025-08-31T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://khar34.github.io/tags/theia/</loc>
-    <lastmod>2025-08-31T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://khar34.github.io/tags/typescript/</loc>
-    <lastmod>2025-08-31T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://khar34.github.io/tags/vs-code/</loc>
-    <lastmod>2025-08-31T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://khar34.github.io/works/</loc>
-    <lastmod>2025-08-31T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://khar34.github.io/works/zein-ide/</loc>
-    <lastmod>2025-08-31T00:00:00+00:00</lastmod>
+    <lastmod>2025-08-30T15:01:17+07:00</lastmod>
   </url><url>
     <loc>https://khar34.github.io/post/</loc>
     <lastmod>2025-08-30T15:01:17+07:00</lastmod>
   </url><url>
     <loc>https://khar34.github.io/post/welcome/</loc>
     <lastmod>2025-08-30T15:01:17+07:00</lastmod>
+  </url><url>
+    <loc>https://khar34.github.io/tags/</loc>
+  </url><url>
+    <loc>https://khar34.github.io/works/</loc>
+  </url><url>
+    <loc>https://khar34.github.io/works/zein-ide/</loc>
   </url>
 </urlset>

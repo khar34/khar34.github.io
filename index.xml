@@ -6,21 +6,21 @@
     <description>Recent content in Home on Pham Hoang Tuan Kha</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 31 Aug 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 30 Aug 2025 15:01:17 +0700</lastBuildDate>
     <atom:link href="https://khar34.github.io/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Zein IDE - A Theia-based Development Environment</title>
-      <link>https://khar34.github.io/works/zein-ide/</link>
-      <pubDate>Sun, 31 Aug 2025 00:00:00 +0000</pubDate>
-      <guid>https://khar34.github.io/works/zein-ide/</guid>
-      <description>A customizable development environment built on Eclipse Theia.</description>
-    </item>
     <item>
       <title>Welcome to my portfolio</title>
       <link>https://khar34.github.io/post/welcome/</link>
       <pubDate>Sat, 30 Aug 2025 15:01:17 +0700</pubDate>
       <guid>https://khar34.github.io/post/welcome/</guid>
       <description>&lt;p&gt;this is some content&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Zein IDE - A Theia-based Development Environment</title>
+      <link>https://khar34.github.io/works/zein-ide/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://khar34.github.io/works/zein-ide/</guid>
+      <description>A customizable development environment built on Eclipse Theia.</description>
     </item>
   </channel>
 </rss>
