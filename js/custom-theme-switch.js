@@ -1,9 +1,9 @@
-// Custom theme switcher button functionality
-document.addEventListener('DOMContentLoaded', function() {
+// Custom theme switcher button functionality with flash prevention
+document.addEventListener("DOMContentLoaded", function () {
   // Create the theme toggle button
-  const themeToggle = document.createElement('button');
-  themeToggle.id = 'theme-toggle';
-  themeToggle.setAttribute('aria-label', 'Toggle dark/light mode');
+  const themeToggle = document.createElement("button");
+  themeToggle.id = "theme-toggle";
+  themeToggle.setAttribute("aria-label", "Toggle dark/light mode");
   themeToggle.innerHTML = `
     <svg xmlns="http://www.w3.org/2000/svg" class="theme-icon theme-icon-light" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <circle cx="12" cy="12" r="5"></circle>
@@ -20,67 +20,93 @@ document.addEventListener('DOMContentLoaded', function() {
       <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
     </svg>
   `;
-  
-  
-  // Add hover effect
-  themeToggle.addEventListener('mouseenter', function() {
-    this.style.transform = 'rotate(15deg)';
-  });
-  
-  themeToggle.addEventListener('mouseleave', function() {
-    this.style.transform = 'rotate(0)';
-  });
-  
+
   // Add the button directly to the body for fixed positioning
   document.body.appendChild(themeToggle);
-  
-  // Toggle dark/light mode when button is clicked
-  themeToggle.addEventListener('click', function() {
-    if (document.body.classList.contains('auto')) {
-      // If in auto mode, first set it to the current mode
-      document.body.classList.remove('auto');
-      if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        document.body.classList.add('dark');
-      } else {
-        document.body.classList.add('light');
-      }
+
+  // Function to get current theme
+  function getCurrentTheme() {
+    if (document.body.classList.contains("dark")) {
+      return "dark";
+    } else if (document.body.classList.contains("light")) {
+      return "light";
     }
-    
-    // Then toggle between dark and light
-    document.body.classList.toggle('dark');
-    document.body.classList.toggle('light');
-    
-    // Store the theme preference in localStorage
-    const currentTheme = document.body.classList.contains('dark') ? 'dark' : 'light';
-    localStorage.setItem('theme-preference', currentTheme);
-    
-    // Update the button appearance
+    return "auto";
+  }
+
+  // Function to set theme
+  function setTheme(theme) {
+    // Remove all theme classes
+    document.body.classList.remove("auto", "dark", "light");
+    document.documentElement.classList.remove("auto", "dark", "light");
+
+    // Add the new theme class
+    document.body.classList.add(theme);
+    document.documentElement.classList.add(theme);
+
+    // Update button appearance
     updateButtonAppearance();
-  });
-  
-  // Function to update button appearance based on current theme
-  function updateButtonAppearance() {
-    const isDarkMode = document.body.classList.contains('dark');
-    const lightIcon = themeToggle.querySelector('.theme-icon-light');
-    const darkIcon = themeToggle.querySelector('.theme-icon-dark');
-    
-    if (isDarkMode) {
-      lightIcon.style.display = 'block';
-      darkIcon.style.display = 'none';
+
+    // Store preference (except for auto)
+    if (theme !== "auto") {
+      localStorage.setItem("theme-preference", theme);
     } else {
-      lightIcon.style.display = 'none';
-      darkIcon.style.display = 'block';
+      localStorage.removeItem("theme-preference");
     }
   }
-  
-  // Initial button appearance update
+
+  // Toggle dark/light mode when button is clicked
+  themeToggle.addEventListener("click", function () {
+    const currentTheme = getCurrentTheme();
+
+    if (currentTheme === "auto") {
+      // If in auto mode, determine current system preference and switch to opposite
+      const prefersDark =
+        window.matchMedia &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches;
+      const newTheme = prefersDark ? "light" : "dark";
+      setTheme(newTheme);
+    } else {
+      // Toggle between dark and light
+      const newTheme = currentTheme === "dark" ? "light" : "dark";
+      setTheme(newTheme);
+    }
+  });
+
+  // Function to update button appearance based on current theme
+  function updateButtonAppearance() {
+    const lightIcon = themeToggle.querySelector(".theme-icon-light");
+    const darkIcon = themeToggle.querySelector(".theme-icon-dark");
+
+    const currentTheme = getCurrentTheme();
+
+    if (currentTheme === "dark") {
+      lightIcon.style.display = "block";
+      darkIcon.style.display = "none";
+    } else if (currentTheme === "light") {
+      lightIcon.style.display = "none";
+      darkIcon.style.display = "block";
+    } else {
+      // Auto mode - show both icons with reduced opacity
+      lightIcon.style.display = "block";
+      darkIcon.style.display = "block";
+      lightIcon.style.opacity = "0.5";
+      darkIcon.style.opacity = "0.5";
+    }
+  }
+
+  // Initialize theme and button appearance
   updateButtonAppearance();
-  
-  // Restore theme preference from localStorage on page load
-  const savedTheme = localStorage.getItem('theme-preference');
-  if (savedTheme) {
-    document.body.classList.remove('auto', 'dark', 'light');
-    document.body.classList.add(savedTheme);
-    updateButtonAppearance();
+
+  // Listen for system theme changes when in auto mode
+  if (window.matchMedia) {
+    window
+      .matchMedia("(prefers-color-scheme: dark)")
+      .addEventListener("change", function (e) {
+        const currentTheme = getCurrentTheme();
+        if (currentTheme === "auto") {
+          updateButtonAppearance();
+        }
+      });
   }
 });

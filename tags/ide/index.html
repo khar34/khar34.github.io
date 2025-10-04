@@ -2,7 +2,73 @@
 <html lang="en-us"
   dir="ltr">
 
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+<head>
+  <script>
+    
+    (function() {
+      var savedTheme = null;
+      try {
+        savedTheme = localStorage.getItem('theme-preference');
+      } catch(e) {}
+
+      var theme = 'auto';
+      if (savedTheme && (savedTheme === 'dark' || savedTheme === 'light')) {
+        theme = savedTheme;
+      } else {
+        
+        theme = 'auto';
+        
+      }
+
+      var finalTheme = theme;
+      if (theme === 'auto') {
+        finalTheme = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
+      }
+
+      
+      document.documentElement.className = finalTheme;
+    })();
+  </script>
+
+  <style>
+     
+    :root {
+      --content-primary: rgb(44, 62, 80);
+      --content-secondary: rgb(108, 122, 137);
+      --background: rgb(248, 249, 250);
+      --code-background: rgb(236, 240, 244);
+      --code-border: rgb(214, 219, 225);
+      --accent-primary: rgb(41, 128, 185);
+      --accent-secondary: rgb(26, 188, 156);
+      --link-color: rgb(52, 152, 219);
+      --link-hover: rgb(41, 128, 185);
+    }
+
+    .dark {
+      --content-primary: rgb(236, 240, 241);
+      --content-secondary: rgb(189, 195, 199);
+      --background: rgb(30, 39, 46);
+      --code-background: rgb(40, 50, 60);
+      --code-border: rgb(52, 73, 94);
+      --accent-primary: rgb(52, 152, 219);
+      --accent-secondary: rgb(26, 188, 156);
+      --link-color: rgb(85, 172, 238);
+      --link-hover: rgb(41, 205, 255);
+    }
+
+     
+    *, *::before, *::after {
+      transition: none !important;
+      animation-duration: 0s !important;
+    }
+
+     
+    html, body {
+      background: var(--background) !important;
+      color: var(--content-primary) !important;
+    }
+  </style>
+
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width">
 
@@ -20,13 +86,13 @@
 
 
 
-<link rel="icon" type="image/ico" href="http://localhost:1313/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="192x192" href="http://localhost:1313/android-chrome-192x192.png">
-<link rel="apple-touch-icon" sizes="180x180" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="icon" type="image/ico" href="https://khar34.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://khar34.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://khar34.github.io/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="https://khar34.github.io/android-chrome-192x192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="https://khar34.github.io/apple-touch-icon.png">
 
-<link rel="alternate" type="application/rss+xml" href="http://localhost:1313/tags/ide/index.xml" title="Pham Hoang Tuan Kha">
+<link rel="alternate" type="application/rss+xml" href="https://khar34.github.io/tags/ide/index.xml" title="Pham Hoang Tuan Kha">
 <meta name="description" content=""/>
 
 
@@ -37,9 +103,9 @@
     
 </title>
 
-<link rel="canonical" href="http://localhost:1313/tags/ide/"/>
+<link rel="canonical" href="https://khar34.github.io/tags/ide/"/>
 
-<meta property="og:url" content="http://localhost:1313/tags/ide/">
+<meta property="og:url" content="https://khar34.github.io/tags/ide/">
   <meta property="og:site_name" content="Pham Hoang Tuan Kha">
   <meta property="og:title" content="IDE">
   <meta property="og:description" content="Portfolio">
@@ -63,7 +129,26 @@
 
 
 <link rel="stylesheet" href="/css/custom-theme-switch.css">
+<link rel="stylesheet" href="/css/portfolio-cards.css">
 <script defer src="/js/custom-theme-switch.js"></script>
+
+
+
+
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-xxxxxxxxx"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-xxxxxxxxx');
+        }
+      </script>
 
 
 
@@ -80,15 +165,25 @@
 
 
 
+
+  <script>
+    
+    document.addEventListener('DOMContentLoaded', function() {
+      
+      document.body.className = document.body.className.replace(/\b(auto|dark|light)\b/g, '').trim();
+      document.body.classList.add(document.documentElement.className);
+
+      
+      setTimeout(function() {
+        var style = document.createElement('style');
+        style.textContent = '*, *::before, *::after { transition: all 0.2s ease !important; animation-duration: revert !important; }';
+        document.head.appendChild(style);
+      }, 50);
+    });
+  </script>
 </head>
 
-
-
-
-
-
-
-<body class="auto">
+<body>
 
   <div class="content">
     <header>
@@ -99,7 +194,7 @@
     
 
     <h1 class="header-title">
-        <a href="http://localhost:1313/">Pham Hoang Tuan Kha</a>
+        <a href="https://khar34.github.io/">Pham Hoang Tuan Kha</a>
     </h1>
 
     <div class="header-menu">

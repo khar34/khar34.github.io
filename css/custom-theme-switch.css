@@ -1,74 +1,84 @@
 /* Custom theme switch button styles */
 #theme-toggle {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  width: 40px;
-  height: 40px;
-  opacity: 0.8;
-  padding: 0;
-  background: var(--background);
-  border: 1px solid var(--content-secondary);
-  border-radius: 50%;
-  cursor: pointer;
-  z-index: 1000;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    opacity: 0.8;
+    padding: 0;
+    background: var(--background);
+    border: 1px solid var(--content-secondary);
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 #theme-toggle:hover {
-  opacity: 1;
-  transform: rotate(15deg);
-  transition: transform 0.3s ease;
+    opacity: 1;
+    transform: rotate(15deg);
+    transition: transform 0.3s ease;
 }
 
 /* Icon styles */
 .theme-icon {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  transition: all 0.3s ease;
-  stroke: var(--content-primary);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 0.3s ease;
+    stroke: var(--content-primary);
 }
 
 /* Show/hide icons based on theme */
 .light .theme-icon-light {
-  display: none;
+    display: none;
 }
 
 .light .theme-icon-dark {
-  display: block;
+    display: block;
 }
 
 .dark .theme-icon-light {
-  display: block;
+    display: block;
 }
 
 .dark .theme-icon-dark {
-  display: none;
+    display: none;
 }
 
 /* For auto theme */
 .auto .theme-icon-light,
 .auto .theme-icon-dark {
-  display: block;
-  opacity: 0.5;
+    display: block;
+    opacity: 0.5;
 }
 
-/* Add a subtle animation for theme changes */
-body {
-  transition: background-color 0.3s ease, color 0.3s ease;
+/* Theme toggle specific transitions */
+#theme-toggle {
+    transition:
+        opacity 0.3s ease,
+        transform 0.3s ease;
+}
+
+a {
+    transition: color 0.2s ease;
+}
+
+.theme-icon {
+    transition: all 0.3s ease;
 }
 
 /* Responsive adjustment */
 @media screen and (max-width: 768px) {
-  #theme-toggle {
-    top: 10px;
-    right: 10px;
-    width: 36px;
-    height: 36px;
-  }
+    #theme-toggle {
+        top: 10px;
+        right: 10px;
+        width: 36px;
+        height: 36px;
+    }
 }

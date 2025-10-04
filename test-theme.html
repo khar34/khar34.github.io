@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Theme Switch Test</title>
+
+    <!-- Inline theme detection script to prevent flash -->
+    <script>
+      (function() {
+        function setThemeClass() {
+          var theme = 'auto';
+
+          // Check localStorage first for user preference
+          var savedTheme = localStorage.getItem('theme-preference');
+          if (savedTheme && (savedTheme === 'dark' || savedTheme === 'light')) {
+            theme = savedTheme;
+          }
+
+          // Remove all theme classes first
+          document.documentElement.classList.remove('auto', 'dark', 'light');
+          document.body.classList.remove('auto', 'dark', 'light');
+
+          if (theme === 'auto') {
+            // Auto mode: detect system preference
+            var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+            var themeClass = prefersDark ? 'dark' : 'light';
+
+            document.documentElement.classList.add(themeClass);
+            document.body.classList.add(themeClass);
+          } else {
+            // User has explicit preference
+            document.documentElement.classList.add(theme);
+            document.body.classList.add(theme);
+          }
+        }
+
+        // Run immediately, before any CSS is applied
+        setThemeClass();
+      })();
+    </script>
+
+    <style>
+        /* CSS Variables for themes */
+        :root {
+            --content-primary: rgb(44, 62, 80);
+            --content-secondary: rgb(108, 122, 137);
+            --background: rgb(248, 249, 250);
+            --code-background: rgb(236, 240, 244);
+            --code-border: rgb(214, 219, 225);
+            --accent-primary: rgb(41, 128, 185);
+        }
+
+        .dark {
+            --content-primary: rgb(236, 240, 241);
+            --content-secondary: rgb(189, 195, 199);
+            --background: rgb(30, 39, 46);
+            --code-background: rgb(40, 50, 60);
+            --code-border: rgb(52, 73, 94);
+            --accent-primary: rgb(52, 152, 219);
+        }
+
+        /* Disable transitions initially to prevent flash */
+        * {
+            transition: none !important;
+        }
+
+        /* Re-enable transitions after theme is loaded */
+        .theme-loaded * {
+            transition: all 0.2s ease !important;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: var(--background);
+            color: var(--content-primary);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: var(--accent-primary);
+            font-size: 2.5em;
+            margin-bottom: 0.5em;
+        }
+
+        .test-section {
+            background: var(--code-background);
+            border: 1px solid var(--code-border);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border: 2px solid var(--accent-primary);
+            border-radius: 50%;
+            background: var(--background);
+            color: var(--content-primary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            z-index: 1000;
+        }
+
+        .theme-toggle:hover {
+            transform: rotate(15deg);
+        }
+
+        .status {
+            font-family: monospace;
+            background: var(--code-background);
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid var(--code-border);
+            margin: 10px 0;
+        }
+
+        .instructions {
+            color: var(--content-secondary);
+            line-height: 1.6;
+        }
+
+        .flash-test {
+            background: linear-gradient(45deg, var(--background), var(--code-background));
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body class="auto">
+    <button class="theme-toggle" onclick="toggleTheme()" title="Toggle theme">🌓</button>
+
+    <div class="container">
+        <h1>Theme Switch Flash Test</h1>
+
+        <div class="instructions">
+            <p>This page tests the theme switching functionality without flash.</p>
+            <p><strong>Instructions:</strong></p>
+            <ol>
+                <li>Click the theme toggle button (🌓) in the top-right corner</li>
+                <li>Navigate between different pages of your site</li>
+                <li>Observe if there's any flash when pages load</li>
+                <li>Try refreshing the page - it should maintain your theme preference</li>
+            </ol>
+        </div>
+
+        <div class="test-section">
+            <h2>Current Theme Status</h2>
+            <div class="status" id="theme-status">Loading...</div>
+            <div class="status" id="preference-status">Loading...</div>
+        </div>
+
+        <div class="flash-test">
+            <h3>Flash Detection Zone</h3>
+            <p>This area uses theme-dependent colors. If you see it flash white/light when switching pages in dark mode, there's still a flash issue.</p>
+        </div>
+
+        <div class="test-section">
+            <h3>Test Links</h3>
+            <p>Use these links to test navigation without flash:</p>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/works">Works</a></li>
+                <li><a href="/post">Posts</a></li>
+                <li><a href="/about">About</a></li>
+            </ul>
+        </div>
+
+        <div class="test-section">
+            <h3>Expected Behavior</h3>
+            <ul>
+                <li>✓ No flash when switching themes</li>
+                <li>✓ No flash when navigating between pages</li>
+                <li>✓ Theme preference is remembered</li>
+                <li>✓ Smooth transitions after initial load</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        function getCurrentTheme() {
+            if (document.body.classList.contains('dark')) return 'dark';
+            if (document.body.classList.contains('light')) return 'light';
+            return 'auto';
+        }
+
+        function setTheme(theme) {
+            document.body.classList.remove('auto', 'dark', 'light');
+            document.documentElement.classList.remove('auto', 'dark', 'light');
+
+            document.body.classList.add(theme);
+            document.documentElement.classList.add(theme);
+
+            if (theme !== 'auto') {
+                localStorage.setItem('theme-preference', theme);
+            } else {
+                localStorage.removeItem('theme-preference');
+            }
+
+            updateStatus();
+        }
+
+        function toggleTheme() {
+            const current = getCurrentTheme();
+            const next = current === 'dark' ? 'light' : 'dark';
+            setTheme(next);
+        }
+
+        function updateStatus() {
+            const currentTheme = getCurrentTheme();
+            const savedTheme = localStorage.getItem('theme-preference') || 'none';
+
+            document.getElementById('theme-status').textContent = `Current theme: ${currentTheme}`;
+            document.getElementById('preference-status').textContent = `Saved preference: ${savedTheme}`;
+        }
+
+        // Enable transitions after a brief delay
+        setTimeout(() => {
+            document.body.classList.add('theme-loaded');
+            document.documentElement.classList.add('theme-loaded');
+        }, 100);
+
+        // Update status on load
+        updateStatus();
+
+        // Listen for system theme changes
+        if (window.matchMedia) {
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', updateStatus);
+        }
+    </script>
+</body>
+</html>
