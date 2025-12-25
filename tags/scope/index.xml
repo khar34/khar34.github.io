@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Scope on Khar34&#39;s Blog</title>
+        <link>http://localhost:1313/tags/scope/</link>
+        <description>Recent content in Scope on Khar34&#39;s Blog</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en-us</language>
+        <lastBuildDate>Thu, 25 Dec 2025 10:10:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/scope/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Closure trong JavaScript: Bí quyết viết hàm thông minh</title>
+        <link>http://localhost:1313/posts/closure-trong-javascript-bi-quyet-viet-ham-thong-minh/</link>
+        <pubDate>Thu, 25 Dec 2025 10:10:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/posts/closure-trong-javascript-bi-quyet-viet-ham-thong-minh/</guid>
+        <description>&lt;p&gt;&lt;code&gt;Closure&lt;/code&gt; là khả năng một hàm ghi nhớ phạm vi (scope) nơi nó được tạo, dù được gọi ở nơi khác.&lt;/p&gt;
+&lt;p&gt;Ví dụ tạo counter riêng tư:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;function&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;createCounter&lt;/span&gt;() {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;let&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;count&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;; &lt;span style=&#34;color:#75715e&#34;&gt;// private
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;inc&lt;/span&gt;() { &lt;span style=&#34;color:#a6e22e&#34;&gt;count&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;; },
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;get&lt;/span&gt;() { &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;count&lt;/span&gt;; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  };
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;c1&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;createCounter&lt;/span&gt;();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;c1&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;inc&lt;/span&gt;();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;console&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;log&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;c1&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;get&lt;/span&gt;()); &lt;span style=&#34;color:#75715e&#34;&gt;// 1
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Ứng dụng:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Factory pattern tạo đối tượng có state riêng.&lt;/li&gt;
+&lt;li&gt;Tạo hàm cấu hình: &lt;code&gt;makeAdder(5)&lt;/code&gt; trả về hàm cộng 5.&lt;/li&gt;
+&lt;li&gt;Tránh lộ biến toàn cục, giữ code sạch.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Lưu ý:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Tránh lạm dụng closure gây rò rỉ bộ nhớ do tham chiếu không cần thiết.&lt;/li&gt;
+&lt;li&gt;Hiểu rõ block scope (&lt;code&gt;let&lt;/code&gt;, &lt;code&gt;const&lt;/code&gt;) vs function scope (&lt;code&gt;var&lt;/code&gt;).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Kết luận: Nắm closure giúp bạn viết JS linh hoạt, tránh bug liên quan phạm vi biến.&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>
