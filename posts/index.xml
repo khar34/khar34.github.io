@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Posts on Khar34 Blog</title>
+        <link>https://khar34.github.com/posts/</link>
+        <description>Recent content in Posts on Khar34 Blog</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en-us</language>
+        <lastBuildDate>Thu, 25 Dec 2025 16:45:36 +0700</lastBuildDate><atom:link href="https://khar34.github.com/posts/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Post</title>
+        <link>https://khar34.github.com/posts/post/</link>
+        <pubDate>Thu, 25 Dec 2025 16:45:36 +0700</pubDate>
+        
+        <guid>https://khar34.github.com/posts/post/</guid>
+        <description>&lt;p&gt;this is some content&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+        </item>
+        
+    </channel>
+</rss>
