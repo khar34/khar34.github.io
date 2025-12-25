@@ -2,16 +2,16 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>Parallel on Khar34&#39;s Blog</title>
-        <link>https://khar34.github.com/tags/parallel/</link>
+        <link>http://localhost:1313/tags/parallel/</link>
         <description>Recent content in Parallel on Khar34&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <lastBuildDate>Thu, 25 Dec 2025 13:00:00 +0700</lastBuildDate><atom:link href="https://khar34.github.com/tags/parallel/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 25 Dec 2025 13:00:00 +0700</lastBuildDate><atom:link href="http://localhost:1313/tags/parallel/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>Multithreading trong Java: Lập Trình Đa Luồng Hiệu Quả</title>
-        <link>https://khar34.github.com/posts/multithreading-trong-java-lap-trinh-da-luong-hieu-qua/</link>
+        <link>http://localhost:1313/posts/multithreading-trong-java-lap-trinh-da-luong-hieu-qua/</link>
         <pubDate>Thu, 25 Dec 2025 13:00:00 +0700</pubDate>
         
-        <guid>https://khar34.github.com/posts/multithreading-trong-java-lap-trinh-da-luong-hieu-qua/</guid>
+        <guid>http://localhost:1313/posts/multithreading-trong-java-lap-trinh-da-luong-hieu-qua/</guid>
         <description>&lt;h2 id=&#34;multithreading-là-gì&#34;&gt;Multithreading là gì?
 &lt;/h2&gt;&lt;p&gt;&lt;strong&gt;Multithreading&lt;/strong&gt; là khả năng thực thi nhiều threads (luồng) đồng thời trong một chương trình. Mỗi thread là một đơn vị thực thi độc lập, giúp tận dụng tối đa CPU và cải thiện performance.&lt;/p&gt;
 &lt;h2 id=&#34;tại-sao-cần-multithreading&#34;&gt;Tại sao cần Multithreading?

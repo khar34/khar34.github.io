@@ -2,16 +2,16 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>Try-Catch on Khar34&#39;s Blog</title>
-        <link>https://khar34.github.com/tags/try-catch/</link>
+        <link>http://localhost:1313/tags/try-catch/</link>
         <description>Recent content in Try-Catch on Khar34&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <lastBuildDate>Thu, 25 Dec 2025 11:00:00 +0700</lastBuildDate><atom:link href="https://khar34.github.com/tags/try-catch/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 25 Dec 2025 11:00:00 +0700</lastBuildDate><atom:link href="http://localhost:1313/tags/try-catch/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>Exception Handling trong Java: Xử Lý Lỗi Chuyên Nghiệp</title>
-        <link>https://khar34.github.com/posts/exception-handling-trong-java-xu-ly-loi-chuyen-nghiep/</link>
+        <link>http://localhost:1313/posts/exception-handling-trong-java-xu-ly-loi-chuyen-nghiep/</link>
         <pubDate>Thu, 25 Dec 2025 11:00:00 +0700</pubDate>
         
-        <guid>https://khar34.github.com/posts/exception-handling-trong-java-xu-ly-loi-chuyen-nghiep/</guid>
+        <guid>http://localhost:1313/posts/exception-handling-trong-java-xu-ly-loi-chuyen-nghiep/</guid>
         <description>&lt;h2 id=&#34;exception-là-gì&#34;&gt;Exception là gì?
 &lt;/h2&gt;&lt;p&gt;&lt;strong&gt;Exception&lt;/strong&gt; (ngoại lệ) là sự kiện bất thường xảy ra trong quá trình thực thi chương trình, làm gián đoạn luồng code bình thường. Java cung cấp cơ chế mạnh mẽ để xử lý exceptions một cách có cấu trúc.&lt;/p&gt;
 &lt;h2 id=&#34;phân-loại-exception-trong-java&#34;&gt;Phân loại Exception trong Java

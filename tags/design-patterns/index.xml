@@ -2,16 +2,16 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>Design Patterns on Khar34&#39;s Blog</title>
-        <link>https://khar34.github.com/tags/design-patterns/</link>
+        <link>http://localhost:1313/tags/design-patterns/</link>
         <description>Recent content in Design Patterns on Khar34&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <lastBuildDate>Thu, 25 Dec 2025 14:00:00 +0700</lastBuildDate><atom:link href="https://khar34.github.com/tags/design-patterns/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 25 Dec 2025 14:00:00 +0700</lastBuildDate><atom:link href="http://localhost:1313/tags/design-patterns/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>Design Patterns trong Java: Giải Pháp Thiết Kế Phổ Biến</title>
-        <link>https://khar34.github.com/posts/design-patterns-trong-java-giai-phap-thiet-ke-pho-bien/</link>
+        <link>http://localhost:1313/posts/design-patterns-trong-java-giai-phap-thiet-ke-pho-bien/</link>
         <pubDate>Thu, 25 Dec 2025 14:00:00 +0700</pubDate>
         
-        <guid>https://khar34.github.com/posts/design-patterns-trong-java-giai-phap-thiet-ke-pho-bien/</guid>
+        <guid>http://localhost:1313/posts/design-patterns-trong-java-giai-phap-thiet-ke-pho-bien/</guid>
         <description>&lt;h2 id=&#34;design-patterns-là-gì&#34;&gt;Design Patterns là gì?
 &lt;/h2&gt;&lt;p&gt;&lt;strong&gt;Design Patterns&lt;/strong&gt; là các giải pháp thiết kế đã được chứng minh hiệu quả cho các vấn đề phổ biến trong lập trình. Patterns không phải là code có sẵn mà là templates giúp giải quyết vấn đề một cách tối ưu.&lt;/p&gt;
 &lt;h2 id=&#34;3-nhóm-design-patterns&#34;&gt;3 nhóm Design Patterns

@@ -2,151 +2,151 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://khar34.github.com/tags/best-practices/</loc>
+    <loc>http://localhost:1313/tags/best-practices/</loc>
     <lastmod>2025-12-25T14:00:00+07:00</lastmod>
   </url><url>
-    <loc>https://khar34.github.com/categories/</loc>
+    <loc>http://localhost:1313/categories/</loc>
     <lastmod>2025-12-25T14:00:00+07:00</lastmod>
   </url><url>
-    <loc>https://khar34.github.com/tags/design-patterns/</loc>
+    <loc>http://localhost:1313/tags/design-patterns/</loc>
     <lastmod>2025-12-25T14:00:00+07:00</lastmod>
   </url><url>
-    <loc>https://khar34.github.com/posts/design-patterns-trong-java-giai-phap-thiet-ke-pho-bien/</loc>
+    <loc>http://localhost:1313/posts/design-patterns-trong-java-giai-phap-thiet-ke-pho-bien/</loc>
     <lastmod>2025-12-25T14:00:00+07:00</lastmod>
   </url><url>
-    <loc>https://khar34.github.com/categories/java/</loc>
+    <loc>http://localhost:1313/categories/java/</loc>
     <lastmod>2025-12-25T14:00:00+07:00</lastmod>
   </url><url>
-    <loc>https://khar34.github.com/tags/java/</loc>
+    <loc>http://localhost:1313/tags/java/</loc>
     <lastmod>2025-12-25T14:00:00+07:00</lastmod>
   </url><url>
-    <loc>https://khar34.github.com/</loc>
+    <loc>http://localhost:1313/</loc>
     <lastmod>2025-12-25T14:00:00+07:00</lastmod>
   </url><url>
-    <loc>https://khar34.github.com/tags/oop/</loc>
+    <loc>http://localhost:1313/tags/oop/</loc>
     <lastmod>2025-12-25T14:00:00+07:00</lastmod>
   </url><url>
-    <loc>https://khar34.github.com/posts/</loc>
+    <loc>http://localhost:1313/posts/</loc>
     <lastmod>2025-12-25T14:00:00+07:00</lastmod>
   </url><url>
-    <loc>https://khar34.github.com/tags/software-architecture/</loc>
+    <loc>http://localhost:1313/tags/software-architecture/</loc>
     <lastmod>2025-12-25T14:00:00+07:00</lastmod>
   </url><url>
-    <loc>https://khar34.github.com/tags/</loc>
+    <loc>http://localhost:1313/tags/</loc>
     <lastmod>2025-12-25T14:00:00+07:00</lastmod>
   </url><url>
-    <loc>https://khar34.github.com/tags/es6/</loc>
+    <loc>http://localhost:1313/tags/es6/</loc>
     <lastmod>2025-12-25T13:30:00+07:00</lastmod>
   </url><url>
-    <loc>https://khar34.github.com/tags/export/</loc>
+    <loc>http://localhost:1313/tags/export/</loc>
     <lastmod>2025-12-25T13:30:00+07:00</lastmod>
   </url><url>
-    <loc>https://khar34.github.com/tags/import/</loc>
+    <loc>http://localhost:1313/tags/import/</loc>
     <lastmod>2025-12-25T13:30:00+07:00</lastmod>
   </url><url>
-    <loc>https://khar34.github.com/categories/javascript/</loc>
+    <loc>http://localhost:1313/categories/javascript/</loc>
     <lastmod>2025-12-25T13:30:00+07:00</lastmod>
   </url><url>
-    <loc>https://khar34.github.com/tags/javascript/</loc>
+    <loc>http://localhost:1313/tags/javascript/</loc>
     <lastmod>2025-12-25T13:30:00+07:00</lastmod>
   </url><url>
-    <loc>https://khar34.github.com/tags/modules/</loc>
+    <loc>http://localhost:1313/tags/modules/</loc>
     <lastmod>2025-12-25T13:30:00+07:00</lastmod>
   </url><url>
-    <loc>https://khar34.github.com/posts/modules-es6-trong-javascript-to-chuc-code-hien-dai/</loc>
+    <loc>http://localhost:1313/posts/modules-es6-trong-javascript-to-chuc-code-hien-dai/</loc>
     <lastmod>2025-12-25T13:30:00+07:00</lastmod>
   </url><url>
-    <loc>https://khar34.github.com/tags/concurrency/</loc>
+    <loc>http://localhost:1313/tags/concurrency/</loc>
     <lastmod>2025-12-25T13:00:00+07:00</lastmod>
   </url><url>
-    <loc>https://khar34.github.com/tags/multithreading/</loc>
+    <loc>http://localhost:1313/tags/multithreading/</loc>
     <lastmod>2025-12-25T13:00:00+07:00</lastmod>
   </url><url>
-    <loc>https://khar34.github.com/posts/multithreading-trong-java-lap-trinh-da-luong-hieu-qua/</loc>
+    <loc>http://localhost:1313/posts/multithreading-trong-java-lap-trinh-da-luong-hieu-qua/</loc>
     <lastmod>2025-12-25T13:00:00+07:00</lastmod>
   </url><url>
-    <loc>https://khar34.github.com/tags/parallel/</loc>
+    <loc>http://localhost:1313/tags/parallel/</loc>
     <lastmod>2025-12-25T13:00:00+07:00</lastmod>
   </url><url>
-    <loc>https://khar34.github.com/tags/thread/</loc>
+    <loc>http://localhost:1313/tags/thread/</loc>
     <lastmod>2025-12-25T13:00:00+07:00</lastmod>
   </url><url>
-    <loc>https://khar34.github.com/tags/inheritance/</loc>
+    <loc>http://localhost:1313/tags/inheritance/</loc>
     <lastmod>2025-12-25T12:30:00+07:00</lastmod>
   </url><url>
-    <loc>https://khar34.github.com/tags/prototype/</loc>
+    <loc>http://localhost:1313/tags/prototype/</loc>
     <lastmod>2025-12-25T12:30:00+07:00</lastmod>
   </url><url>
-    <loc>https://khar34.github.com/posts/prototypes-trong-javascript-ke-thua-va-oop/</loc>
+    <loc>http://localhost:1313/posts/prototypes-trong-javascript-ke-thua-va-oop/</loc>
     <lastmod>2025-12-25T12:30:00+07:00</lastmod>
   </url><url>
-    <loc>https://khar34.github.com/tags/collections/</loc>
+    <loc>http://localhost:1313/tags/collections/</loc>
     <lastmod>2025-12-25T12:00:00+07:00</lastmod>
   </url><url>
-    <loc>https://khar34.github.com/posts/collections-framework-trong-java-lam-chu-cau-truc-du-lieu/</loc>
+    <loc>http://localhost:1313/posts/collections-framework-trong-java-lam-chu-cau-truc-du-lieu/</loc>
     <lastmod>2025-12-25T12:00:00+07:00</lastmod>
   </url><url>
-    <loc>https://khar34.github.com/tags/data-structures/</loc>
+    <loc>http://localhost:1313/tags/data-structures/</loc>
     <lastmod>2025-12-25T12:00:00+07:00</lastmod>
   </url><url>
-    <loc>https://khar34.github.com/tags/list/</loc>
+    <loc>http://localhost:1313/tags/list/</loc>
     <lastmod>2025-12-25T12:00:00+07:00</lastmod>
   </url><url>
-    <loc>https://khar34.github.com/tags/map/</loc>
+    <loc>http://localhost:1313/tags/map/</loc>
     <lastmod>2025-12-25T12:00:00+07:00</lastmod>
   </url><url>
-    <loc>https://khar34.github.com/tags/set/</loc>
+    <loc>http://localhost:1313/tags/set/</loc>
     <lastmod>2025-12-25T12:00:00+07:00</lastmod>
   </url><url>
-    <loc>https://khar34.github.com/tags/async/</loc>
+    <loc>http://localhost:1313/tags/async/</loc>
     <lastmod>2025-12-25T11:30:00+07:00</lastmod>
   </url><url>
-    <loc>https://khar34.github.com/tags/callback-queue/</loc>
+    <loc>http://localhost:1313/tags/callback-queue/</loc>
     <lastmod>2025-12-25T11:30:00+07:00</lastmod>
   </url><url>
-    <loc>https://khar34.github.com/tags/callstack/</loc>
+    <loc>http://localhost:1313/tags/callstack/</loc>
     <lastmod>2025-12-25T11:30:00+07:00</lastmod>
   </url><url>
-    <loc>https://khar34.github.com/tags/event-loop/</loc>
+    <loc>http://localhost:1313/tags/event-loop/</loc>
     <lastmod>2025-12-25T11:30:00+07:00</lastmod>
   </url><url>
-    <loc>https://khar34.github.com/posts/event-loop-trong-javascript-co-che-bat-dong-bo-hoat-dong/</loc>
+    <loc>http://localhost:1313/posts/event-loop-trong-javascript-co-che-bat-dong-bo-hoat-dong/</loc>
     <lastmod>2025-12-25T11:30:00+07:00</lastmod>
   </url><url>
-    <loc>https://khar34.github.com/tags/error-handling/</loc>
+    <loc>http://localhost:1313/tags/error-handling/</loc>
     <lastmod>2025-12-25T11:00:00+07:00</lastmod>
   </url><url>
-    <loc>https://khar34.github.com/tags/exception/</loc>
+    <loc>http://localhost:1313/tags/exception/</loc>
     <lastmod>2025-12-25T11:00:00+07:00</lastmod>
   </url><url>
-    <loc>https://khar34.github.com/posts/exception-handling-trong-java-xu-ly-loi-chuyen-nghiep/</loc>
+    <loc>http://localhost:1313/posts/exception-handling-trong-java-xu-ly-loi-chuyen-nghiep/</loc>
     <lastmod>2025-12-25T11:00:00+07:00</lastmod>
   </url><url>
-    <loc>https://khar34.github.com/tags/try-catch/</loc>
+    <loc>http://localhost:1313/tags/try-catch/</loc>
     <lastmod>2025-12-25T11:00:00+07:00</lastmod>
   </url><url>
-    <loc>https://khar34.github.com/tags/callback/</loc>
+    <loc>http://localhost:1313/tags/callback/</loc>
     <lastmod>2025-12-25T10:30:00+07:00</lastmod>
   </url><url>
-    <loc>https://khar34.github.com/tags/promise/</loc>
+    <loc>http://localhost:1313/tags/promise/</loc>
     <lastmod>2025-12-25T10:30:00+07:00</lastmod>
   </url><url>
-    <loc>https://khar34.github.com/posts/promises-trong-javascript-xu-ly-bat-dong-bo-hieu-qua/</loc>
+    <loc>http://localhost:1313/posts/promises-trong-javascript-xu-ly-bat-dong-bo-hieu-qua/</loc>
     <lastmod>2025-12-25T10:30:00+07:00</lastmod>
   </url><url>
-    <loc>https://khar34.github.com/tags/dependency-injection/</loc>
+    <loc>http://localhost:1313/tags/dependency-injection/</loc>
     <lastmod>2025-12-25T10:00:00+07:00</lastmod>
   </url><url>
-    <loc>https://khar34.github.com/posts/dependency-injection-trong-java-hieu-va-ap-dung/</loc>
+    <loc>http://localhost:1313/posts/dependency-injection-trong-java-hieu-va-ap-dung/</loc>
     <lastmod>2025-12-25T10:00:00+07:00</lastmod>
   </url><url>
-    <loc>https://khar34.github.com/tags/design-pattern/</loc>
+    <loc>http://localhost:1313/tags/design-pattern/</loc>
     <lastmod>2025-12-25T10:00:00+07:00</lastmod>
   </url><url>
-    <loc>https://khar34.github.com/tags/solid/</loc>
+    <loc>http://localhost:1313/tags/solid/</loc>
     <lastmod>2025-12-25T10:00:00+07:00</lastmod>
   </url><url>
-    <loc>https://khar34.github.com/tags/spring/</loc>
+    <loc>http://localhost:1313/tags/spring/</loc>
     <lastmod>2025-12-25T10:00:00+07:00</lastmod>
   </url>
 </urlset>

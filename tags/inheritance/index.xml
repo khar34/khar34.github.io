@@ -2,16 +2,16 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>Inheritance on Khar34&#39;s Blog</title>
-        <link>https://khar34.github.com/tags/inheritance/</link>
+        <link>http://localhost:1313/tags/inheritance/</link>
         <description>Recent content in Inheritance on Khar34&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <lastBuildDate>Thu, 25 Dec 2025 12:30:00 +0700</lastBuildDate><atom:link href="https://khar34.github.com/tags/inheritance/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 25 Dec 2025 12:30:00 +0700</lastBuildDate><atom:link href="http://localhost:1313/tags/inheritance/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>Prototypes trong JavaScript: Kế Thừa và OOP</title>
-        <link>https://khar34.github.com/posts/prototypes-trong-javascript-ke-thua-va-oop/</link>
+        <link>http://localhost:1313/posts/prototypes-trong-javascript-ke-thua-va-oop/</link>
         <pubDate>Thu, 25 Dec 2025 12:30:00 +0700</pubDate>
         
-        <guid>https://khar34.github.com/posts/prototypes-trong-javascript-ke-thua-va-oop/</guid>
+        <guid>http://localhost:1313/posts/prototypes-trong-javascript-ke-thua-va-oop/</guid>
         <description>&lt;h2 id=&#34;prototype-là-gì&#34;&gt;Prototype là gì?
 &lt;/h2&gt;&lt;p&gt;&lt;strong&gt;Prototype&lt;/strong&gt; là cơ chế cốt lõi của JavaScript để thực hiện kế thừa (inheritance). Mọi object trong JavaScript đều có một prototype, và có thể kế thừa properties/methods từ prototype đó.&lt;/p&gt;
 &lt;h2 id=&#34;javascript-không-có-class-truyền-thống&#34;&gt;JavaScript không có Class truyền thống

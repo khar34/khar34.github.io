@@ -2,280 +2,280 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>Tags on Khar34&#39;s Blog</title>
-        <link>https://khar34.github.com/tags/</link>
+        <link>http://localhost:1313/tags/</link>
         <description>Recent content in Tags on Khar34&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <lastBuildDate>Thu, 25 Dec 2025 14:00:00 +0700</lastBuildDate><atom:link href="https://khar34.github.com/tags/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 25 Dec 2025 14:00:00 +0700</lastBuildDate><atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>Best Practices</title>
-        <link>https://khar34.github.com/tags/best-practices/</link>
+        <link>http://localhost:1313/tags/best-practices/</link>
         <pubDate>Thu, 25 Dec 2025 14:00:00 +0700</pubDate>
         
-        <guid>https://khar34.github.com/tags/best-practices/</guid>
+        <guid>http://localhost:1313/tags/best-practices/</guid>
         <description></description>
         </item>
         <item>
         <title>Design Patterns</title>
-        <link>https://khar34.github.com/tags/design-patterns/</link>
+        <link>http://localhost:1313/tags/design-patterns/</link>
         <pubDate>Thu, 25 Dec 2025 14:00:00 +0700</pubDate>
         
-        <guid>https://khar34.github.com/tags/design-patterns/</guid>
+        <guid>http://localhost:1313/tags/design-patterns/</guid>
         <description></description>
         </item>
         <item>
         <title>Java</title>
-        <link>https://khar34.github.com/tags/java/</link>
+        <link>http://localhost:1313/tags/java/</link>
         <pubDate>Thu, 25 Dec 2025 14:00:00 +0700</pubDate>
         
-        <guid>https://khar34.github.com/tags/java/</guid>
+        <guid>http://localhost:1313/tags/java/</guid>
         <description></description>
         </item>
         <item>
         <title>OOP</title>
-        <link>https://khar34.github.com/tags/oop/</link>
+        <link>http://localhost:1313/tags/oop/</link>
         <pubDate>Thu, 25 Dec 2025 14:00:00 +0700</pubDate>
         
-        <guid>https://khar34.github.com/tags/oop/</guid>
+        <guid>http://localhost:1313/tags/oop/</guid>
         <description></description>
         </item>
         <item>
         <title>Software Architecture</title>
-        <link>https://khar34.github.com/tags/software-architecture/</link>
+        <link>http://localhost:1313/tags/software-architecture/</link>
         <pubDate>Thu, 25 Dec 2025 14:00:00 +0700</pubDate>
         
-        <guid>https://khar34.github.com/tags/software-architecture/</guid>
+        <guid>http://localhost:1313/tags/software-architecture/</guid>
         <description></description>
         </item>
         <item>
         <title>ES6</title>
-        <link>https://khar34.github.com/tags/es6/</link>
+        <link>http://localhost:1313/tags/es6/</link>
         <pubDate>Thu, 25 Dec 2025 13:30:00 +0700</pubDate>
         
-        <guid>https://khar34.github.com/tags/es6/</guid>
+        <guid>http://localhost:1313/tags/es6/</guid>
         <description></description>
         </item>
         <item>
         <title>Export</title>
-        <link>https://khar34.github.com/tags/export/</link>
+        <link>http://localhost:1313/tags/export/</link>
         <pubDate>Thu, 25 Dec 2025 13:30:00 +0700</pubDate>
         
-        <guid>https://khar34.github.com/tags/export/</guid>
+        <guid>http://localhost:1313/tags/export/</guid>
         <description></description>
         </item>
         <item>
         <title>Import</title>
-        <link>https://khar34.github.com/tags/import/</link>
+        <link>http://localhost:1313/tags/import/</link>
         <pubDate>Thu, 25 Dec 2025 13:30:00 +0700</pubDate>
         
-        <guid>https://khar34.github.com/tags/import/</guid>
+        <guid>http://localhost:1313/tags/import/</guid>
         <description></description>
         </item>
         <item>
         <title>JavaScript</title>
-        <link>https://khar34.github.com/tags/javascript/</link>
+        <link>http://localhost:1313/tags/javascript/</link>
         <pubDate>Thu, 25 Dec 2025 13:30:00 +0700</pubDate>
         
-        <guid>https://khar34.github.com/tags/javascript/</guid>
+        <guid>http://localhost:1313/tags/javascript/</guid>
         <description></description>
         </item>
         <item>
         <title>Modules</title>
-        <link>https://khar34.github.com/tags/modules/</link>
+        <link>http://localhost:1313/tags/modules/</link>
         <pubDate>Thu, 25 Dec 2025 13:30:00 +0700</pubDate>
         
-        <guid>https://khar34.github.com/tags/modules/</guid>
+        <guid>http://localhost:1313/tags/modules/</guid>
         <description></description>
         </item>
         <item>
         <title>Concurrency</title>
-        <link>https://khar34.github.com/tags/concurrency/</link>
+        <link>http://localhost:1313/tags/concurrency/</link>
         <pubDate>Thu, 25 Dec 2025 13:00:00 +0700</pubDate>
         
-        <guid>https://khar34.github.com/tags/concurrency/</guid>
+        <guid>http://localhost:1313/tags/concurrency/</guid>
         <description></description>
         </item>
         <item>
         <title>Multithreading</title>
-        <link>https://khar34.github.com/tags/multithreading/</link>
+        <link>http://localhost:1313/tags/multithreading/</link>
         <pubDate>Thu, 25 Dec 2025 13:00:00 +0700</pubDate>
         
-        <guid>https://khar34.github.com/tags/multithreading/</guid>
+        <guid>http://localhost:1313/tags/multithreading/</guid>
         <description></description>
         </item>
         <item>
         <title>Parallel</title>
-        <link>https://khar34.github.com/tags/parallel/</link>
+        <link>http://localhost:1313/tags/parallel/</link>
         <pubDate>Thu, 25 Dec 2025 13:00:00 +0700</pubDate>
         
-        <guid>https://khar34.github.com/tags/parallel/</guid>
+        <guid>http://localhost:1313/tags/parallel/</guid>
         <description></description>
         </item>
         <item>
         <title>Thread</title>
-        <link>https://khar34.github.com/tags/thread/</link>
+        <link>http://localhost:1313/tags/thread/</link>
         <pubDate>Thu, 25 Dec 2025 13:00:00 +0700</pubDate>
         
-        <guid>https://khar34.github.com/tags/thread/</guid>
+        <guid>http://localhost:1313/tags/thread/</guid>
         <description></description>
         </item>
         <item>
         <title>Inheritance</title>
-        <link>https://khar34.github.com/tags/inheritance/</link>
+        <link>http://localhost:1313/tags/inheritance/</link>
         <pubDate>Thu, 25 Dec 2025 12:30:00 +0700</pubDate>
         
-        <guid>https://khar34.github.com/tags/inheritance/</guid>
+        <guid>http://localhost:1313/tags/inheritance/</guid>
         <description></description>
         </item>
         <item>
         <title>Prototype</title>
-        <link>https://khar34.github.com/tags/prototype/</link>
+        <link>http://localhost:1313/tags/prototype/</link>
         <pubDate>Thu, 25 Dec 2025 12:30:00 +0700</pubDate>
         
-        <guid>https://khar34.github.com/tags/prototype/</guid>
+        <guid>http://localhost:1313/tags/prototype/</guid>
         <description></description>
         </item>
         <item>
         <title>Collections</title>
-        <link>https://khar34.github.com/tags/collections/</link>
+        <link>http://localhost:1313/tags/collections/</link>
         <pubDate>Thu, 25 Dec 2025 12:00:00 +0700</pubDate>
         
-        <guid>https://khar34.github.com/tags/collections/</guid>
+        <guid>http://localhost:1313/tags/collections/</guid>
         <description></description>
         </item>
         <item>
         <title>Data Structures</title>
-        <link>https://khar34.github.com/tags/data-structures/</link>
+        <link>http://localhost:1313/tags/data-structures/</link>
         <pubDate>Thu, 25 Dec 2025 12:00:00 +0700</pubDate>
         
-        <guid>https://khar34.github.com/tags/data-structures/</guid>
+        <guid>http://localhost:1313/tags/data-structures/</guid>
         <description></description>
         </item>
         <item>
         <title>List</title>
-        <link>https://khar34.github.com/tags/list/</link>
+        <link>http://localhost:1313/tags/list/</link>
         <pubDate>Thu, 25 Dec 2025 12:00:00 +0700</pubDate>
         
-        <guid>https://khar34.github.com/tags/list/</guid>
+        <guid>http://localhost:1313/tags/list/</guid>
         <description></description>
         </item>
         <item>
         <title>Map</title>
-        <link>https://khar34.github.com/tags/map/</link>
+        <link>http://localhost:1313/tags/map/</link>
         <pubDate>Thu, 25 Dec 2025 12:00:00 +0700</pubDate>
         
-        <guid>https://khar34.github.com/tags/map/</guid>
+        <guid>http://localhost:1313/tags/map/</guid>
         <description></description>
         </item>
         <item>
         <title>Set</title>
-        <link>https://khar34.github.com/tags/set/</link>
+        <link>http://localhost:1313/tags/set/</link>
         <pubDate>Thu, 25 Dec 2025 12:00:00 +0700</pubDate>
         
-        <guid>https://khar34.github.com/tags/set/</guid>
+        <guid>http://localhost:1313/tags/set/</guid>
         <description></description>
         </item>
         <item>
         <title>Async</title>
-        <link>https://khar34.github.com/tags/async/</link>
+        <link>http://localhost:1313/tags/async/</link>
         <pubDate>Thu, 25 Dec 2025 11:30:00 +0700</pubDate>
         
-        <guid>https://khar34.github.com/tags/async/</guid>
+        <guid>http://localhost:1313/tags/async/</guid>
         <description></description>
         </item>
         <item>
         <title>Callback Queue</title>
-        <link>https://khar34.github.com/tags/callback-queue/</link>
+        <link>http://localhost:1313/tags/callback-queue/</link>
         <pubDate>Thu, 25 Dec 2025 11:30:00 +0700</pubDate>
         
-        <guid>https://khar34.github.com/tags/callback-queue/</guid>
+        <guid>http://localhost:1313/tags/callback-queue/</guid>
         <description></description>
         </item>
         <item>
         <title>CallStack</title>
-        <link>https://khar34.github.com/tags/callstack/</link>
+        <link>http://localhost:1313/tags/callstack/</link>
         <pubDate>Thu, 25 Dec 2025 11:30:00 +0700</pubDate>
         
-        <guid>https://khar34.github.com/tags/callstack/</guid>
+        <guid>http://localhost:1313/tags/callstack/</guid>
         <description></description>
         </item>
         <item>
         <title>Event Loop</title>
-        <link>https://khar34.github.com/tags/event-loop/</link>
+        <link>http://localhost:1313/tags/event-loop/</link>
         <pubDate>Thu, 25 Dec 2025 11:30:00 +0700</pubDate>
         
-        <guid>https://khar34.github.com/tags/event-loop/</guid>
+        <guid>http://localhost:1313/tags/event-loop/</guid>
         <description></description>
         </item>
         <item>
         <title>Error Handling</title>
-        <link>https://khar34.github.com/tags/error-handling/</link>
+        <link>http://localhost:1313/tags/error-handling/</link>
         <pubDate>Thu, 25 Dec 2025 11:00:00 +0700</pubDate>
         
-        <guid>https://khar34.github.com/tags/error-handling/</guid>
+        <guid>http://localhost:1313/tags/error-handling/</guid>
         <description></description>
         </item>
         <item>
         <title>Exception</title>
-        <link>https://khar34.github.com/tags/exception/</link>
+        <link>http://localhost:1313/tags/exception/</link>
         <pubDate>Thu, 25 Dec 2025 11:00:00 +0700</pubDate>
         
-        <guid>https://khar34.github.com/tags/exception/</guid>
+        <guid>http://localhost:1313/tags/exception/</guid>
         <description></description>
         </item>
         <item>
         <title>Try-Catch</title>
-        <link>https://khar34.github.com/tags/try-catch/</link>
+        <link>http://localhost:1313/tags/try-catch/</link>
         <pubDate>Thu, 25 Dec 2025 11:00:00 +0700</pubDate>
         
-        <guid>https://khar34.github.com/tags/try-catch/</guid>
+        <guid>http://localhost:1313/tags/try-catch/</guid>
         <description></description>
         </item>
         <item>
         <title>Callback</title>
-        <link>https://khar34.github.com/tags/callback/</link>
+        <link>http://localhost:1313/tags/callback/</link>
         <pubDate>Thu, 25 Dec 2025 10:30:00 +0700</pubDate>
         
-        <guid>https://khar34.github.com/tags/callback/</guid>
+        <guid>http://localhost:1313/tags/callback/</guid>
         <description></description>
         </item>
         <item>
         <title>Promise</title>
-        <link>https://khar34.github.com/tags/promise/</link>
+        <link>http://localhost:1313/tags/promise/</link>
         <pubDate>Thu, 25 Dec 2025 10:30:00 +0700</pubDate>
         
-        <guid>https://khar34.github.com/tags/promise/</guid>
+        <guid>http://localhost:1313/tags/promise/</guid>
         <description></description>
         </item>
         <item>
         <title>Dependency Injection</title>
-        <link>https://khar34.github.com/tags/dependency-injection/</link>
+        <link>http://localhost:1313/tags/dependency-injection/</link>
         <pubDate>Thu, 25 Dec 2025 10:00:00 +0700</pubDate>
         
-        <guid>https://khar34.github.com/tags/dependency-injection/</guid>
+        <guid>http://localhost:1313/tags/dependency-injection/</guid>
         <description></description>
         </item>
         <item>
         <title>Design Pattern</title>
-        <link>https://khar34.github.com/tags/design-pattern/</link>
+        <link>http://localhost:1313/tags/design-pattern/</link>
         <pubDate>Thu, 25 Dec 2025 10:00:00 +0700</pubDate>
         
-        <guid>https://khar34.github.com/tags/design-pattern/</guid>
+        <guid>http://localhost:1313/tags/design-pattern/</guid>
         <description></description>
         </item>
         <item>
         <title>SOLID</title>
-        <link>https://khar34.github.com/tags/solid/</link>
+        <link>http://localhost:1313/tags/solid/</link>
         <pubDate>Thu, 25 Dec 2025 10:00:00 +0700</pubDate>
         
-        <guid>https://khar34.github.com/tags/solid/</guid>
+        <guid>http://localhost:1313/tags/solid/</guid>
         <description></description>
         </item>
         <item>
         <title>Spring</title>
-        <link>https://khar34.github.com/tags/spring/</link>
+        <link>http://localhost:1313/tags/spring/</link>
         <pubDate>Thu, 25 Dec 2025 10:00:00 +0700</pubDate>
         
-        <guid>https://khar34.github.com/tags/spring/</guid>
+        <guid>http://localhost:1313/tags/spring/</guid>
         <description></description>
         </item>
         

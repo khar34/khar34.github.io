@@ -2,24 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>Categories on Khar34&#39;s Blog</title>
-        <link>https://khar34.github.com/categories/</link>
+        <link>http://localhost:1313/categories/</link>
         <description>Recent content in Categories on Khar34&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <lastBuildDate>Thu, 25 Dec 2025 14:00:00 +0700</lastBuildDate><atom:link href="https://khar34.github.com/categories/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 25 Dec 2025 14:00:00 +0700</lastBuildDate><atom:link href="http://localhost:1313/categories/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>Java</title>
-        <link>https://khar34.github.com/categories/java/</link>
+        <link>http://localhost:1313/categories/java/</link>
         <pubDate>Thu, 25 Dec 2025 14:00:00 +0700</pubDate>
         
-        <guid>https://khar34.github.com/categories/java/</guid>
+        <guid>http://localhost:1313/categories/java/</guid>
         <description></description>
         </item>
         <item>
         <title>JavaScript</title>
-        <link>https://khar34.github.com/categories/javascript/</link>
+        <link>http://localhost:1313/categories/javascript/</link>
         <pubDate>Thu, 25 Dec 2025 13:30:00 +0700</pubDate>
         
-        <guid>https://khar34.github.com/categories/javascript/</guid>
+        <guid>http://localhost:1313/categories/javascript/</guid>
         <description></description>
         </item>
         

@@ -2,16 +2,16 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>Modules on Khar34&#39;s Blog</title>
-        <link>https://khar34.github.com/tags/modules/</link>
+        <link>http://localhost:1313/tags/modules/</link>
         <description>Recent content in Modules on Khar34&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <lastBuildDate>Thu, 25 Dec 2025 13:30:00 +0700</lastBuildDate><atom:link href="https://khar34.github.com/tags/modules/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 25 Dec 2025 13:30:00 +0700</lastBuildDate><atom:link href="http://localhost:1313/tags/modules/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>Modules ES6 trong JavaScript: Tổ Chức Code Hiện Đại</title>
-        <link>https://khar34.github.com/posts/modules-es6-trong-javascript-to-chuc-code-hien-dai/</link>
+        <link>http://localhost:1313/posts/modules-es6-trong-javascript-to-chuc-code-hien-dai/</link>
         <pubDate>Thu, 25 Dec 2025 13:30:00 +0700</pubDate>
         
-        <guid>https://khar34.github.com/posts/modules-es6-trong-javascript-to-chuc-code-hien-dai/</guid>
+        <guid>http://localhost:1313/posts/modules-es6-trong-javascript-to-chuc-code-hien-dai/</guid>
         <description>&lt;h2 id=&#34;modules-là-gì&#34;&gt;Modules là gì?
 &lt;/h2&gt;&lt;p&gt;&lt;strong&gt;ES6 Modules&lt;/strong&gt; là cơ chế chuẩn để chia code JavaScript thành các files riêng biệt, có thể import/export giữa chúng. Modules giúp code dễ maintain, tái sử dụng và tránh pollution global scope.&lt;/p&gt;
 &lt;h2 id=&#34;trước-khi-có-modules&#34;&gt;Trước khi có Modules
