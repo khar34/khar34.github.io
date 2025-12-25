@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="Promise là gì?\rPromise là một object đại diện cho kết quả (thành công hoặc thất bại) của một thao tác bất đồng bộ trong tương lai. Promise giúp code JavaScript dễ đọc và dễ quản lý hơn so với callback truyền thống.\nVấn đề với Callback Hell\rTrước khi có Promise, chúng ta thường gặp &ldquo;Callback Hell&rdquo;:\ngetUser(userId, function(user) { getOrders(user.id, function(orders) { getOrderDetails(orders[0].id, function(details) { console.log(details); // Càng lúc càng lồng sâu... }); }); }); Cú pháp Promise\rTạo Promise\rconst myPromise = new Promise((resolve, reject) =&gt; { // Thực hiện tác vụ bất đồng bộ const success = true; if (success) { resolve(&#39;Thành công!&#39;); } else { reject(&#39;Có lỗi xảy ra!&#39;); } }); 3 trạng thái của Promise\rPending: Đang chờ xử lý Fulfilled: Hoàn thành thành công (resolve được gọi) Rejected: Thất bại (reject được gọi) Sử dụng Promise\rthen() và catch()\rmyPromise .then(result =&gt; { console.log(result); // &#34;Thành công!&#34; }) .catch(error =&gt; { console.error(error); }); Ví dụ thực tế: Fetch API\rfetch(&#39;https://api.example.com/users&#39;) .then(response =&gt; response.json()) .then(users =&gt; { console.log(&#39;Danh sách users:&#39;, users); }) .catch(error =&gt; { console.error(&#39;Lỗi:&#39;, error); }); Promise Chaining\rPromise có thể chain (nối tiếp) để thực hiện nhiều tác vụ tuần tự:\n">
+<title>Promises trong JavaScript: Xử Lý Bất Đồng Bộ Hiệu Quả</title>
+
+<link rel='canonical' href='https://khar34.github.com/posts/promises-trong-javascript-xu-ly-bat-dong-bo-hieu-qua/'>
+
+<link rel="stylesheet" href="/scss/style.min.b9e9128fec450ebccecc4ec9900157f32b85d0609bcd5ee3293968bcaa1235f2.css"><meta property='og:title' content="Promises trong JavaScript: Xử Lý Bất Đồng Bộ Hiệu Quả">
+<meta property='og:description' content="Promise là gì?\rPromise là một object đại diện cho kết quả (thành công hoặc thất bại) của một thao tác bất đồng bộ trong tương lai. Promise giúp code JavaScript dễ đọc và dễ quản lý hơn so với callback truyền thống.\nVấn đề với Callback Hell\rTrước khi có Promise, chúng ta thường gặp &ldquo;Callback Hell&rdquo;:\ngetUser(userId, function(user) { getOrders(user.id, function(orders) { getOrderDetails(orders[0].id, function(details) { console.log(details); // Càng lúc càng lồng sâu... }); }); }); Cú pháp Promise\rTạo Promise\rconst myPromise = new Promise((resolve, reject) =&gt; { // Thực hiện tác vụ bất đồng bộ const success = true; if (success) { resolve(&#39;Thành công!&#39;); } else { reject(&#39;Có lỗi xảy ra!&#39;); } }); 3 trạng thái của Promise\rPending: Đang chờ xử lý Fulfilled: Hoàn thành thành công (resolve được gọi) Rejected: Thất bại (reject được gọi) Sử dụng Promise\rthen() và catch()\rmyPromise .then(result =&gt; { console.log(result); // &#34;Thành công!&#34; }) .catch(error =&gt; { console.error(error); }); Ví dụ thực tế: Fetch API\rfetch(&#39;https://api.example.com/users&#39;) .then(response =&gt; response.json()) .then(users =&gt; { console.log(&#39;Danh sách users:&#39;, users); }) .catch(error =&gt; { console.error(&#39;Lỗi:&#39;, error); }); Promise Chaining\rPromise có thể chain (nối tiếp) để thực hiện nhiều tác vụ tuần tự:\n">
+<meta property='og:url' content='https://khar34.github.com/posts/promises-trong-javascript-xu-ly-bat-dong-bo-hieu-qua/'>
+<meta property='og:site_name' content='Khar34&#39;s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='JavaScript' /><meta property='article:tag' content='Promise' /><meta property='article:tag' content='Async' /><meta property='article:tag' content='ES6' /><meta property='article:tag' content='Callback' /><meta property='article:published_time' content='2025-12-25T10:30:00&#43;07:00'/><meta property='article:modified_time' content='2025-12-25T10:30:00&#43;07:00'/>
+<meta name="twitter:title" content="Promises trong JavaScript: Xử Lý Bất Đồng Bộ Hiệu Quả">
+<meta name="twitter:description" content="Promise là gì?\rPromise là một object đại diện cho kết quả (thành công hoặc thất bại) của một thao tác bất đồng bộ trong tương lai. Promise giúp code JavaScript dễ đọc và dễ quản lý hơn so với callback truyền thống.\nVấn đề với Callback Hell\rTrước khi có Promise, chúng ta thường gặp &ldquo;Callback Hell&rdquo;:\ngetUser(userId, function(user) { getOrders(user.id, function(orders) { getOrderDetails(orders[0].id, function(details) { console.log(details); // Càng lúc càng lồng sâu... }); }); }); Cú pháp Promise\rTạo Promise\rconst myPromise = new Promise((resolve, reject) =&gt; { // Thực hiện tác vụ bất đồng bộ const success = true; if (success) { resolve(&#39;Thành công!&#39;); } else { reject(&#39;Có lỗi xảy ra!&#39;); } }); 3 trạng thái của Promise\rPending: Đang chờ xử lý Fulfilled: Hoàn thành thành công (resolve được gọi) Rejected: Thất bại (reject được gọi) Sử dụng Promise\rthen() và catch()\rmyPromise .then(result =&gt; { console.log(result); // &#34;Thành công!&#34; }) .catch(error =&gt; { console.error(error); }); Ví dụ thực tế: Fetch API\rfetch(&#39;https://api.example.com/users&#39;) .then(response =&gt; response.json()) .then(users =&gt; { console.log(&#39;Danh sách users:&#39;, users); }) .catch(error =&gt; { console.error(&#39;Lỗi:&#39;, error); }); Promise Chaining\rPromise có thể chain (nối tiếp) để thực hiện nhiều tác vụ tuần tự:\n">
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column compact"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_5efb6e76a8135b55.png" width="300"
+                            height="222" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Khar34&#39;s Blog</a></h1>
+            <h2 class="site-description"></h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>Dark Mode</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/javascript/" >
+                JavaScript
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/posts/promises-trong-javascript-xu-ly-bat-dong-bo-hieu-qua/">Promises trong JavaScript: Xử Lý Bất Đồng Bộ Hiệu Quả</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published" datetime='2025-12-25T10:30:00&#43;07:00'>Dec 25, 2025</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    4 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h2 id="promise-là-gì">Promise là gì?
+</h2><p><strong>Promise</strong> là một object đại diện cho kết quả (thành công hoặc thất bại) của một thao tác bất đồng bộ trong tương lai. Promise giúp code JavaScript dễ đọc và dễ quản lý hơn so với callback truyền thống.</p>
+<h2 id="vấn-đề-với-callback-hell">Vấn đề với Callback Hell
+</h2><p>Trước khi có Promise, chúng ta thường gặp &ldquo;Callback Hell&rdquo;:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#a6e22e">getUser</span>(<span style="color:#a6e22e">userId</span>, <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">user</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">getOrders</span>(<span style="color:#a6e22e">user</span>.<span style="color:#a6e22e">id</span>, <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">orders</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">getOrderDetails</span>(<span style="color:#a6e22e">orders</span>[<span style="color:#ae81ff">0</span>].<span style="color:#a6e22e">id</span>, <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">details</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">details</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// Càng lúc càng lồng sâu...
+</span></span></span><span style="display:flex;"><span>        });
+</span></span><span style="display:flex;"><span>    });
+</span></span><span style="display:flex;"><span>});
+</span></span></code></pre></div><h2 id="cú-pháp-promise">Cú pháp Promise
+</h2><h3 id="tạo-promise">Tạo Promise
+</h3><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">myPromise</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Promise((<span style="color:#a6e22e">resolve</span>, <span style="color:#a6e22e">reject</span>) =&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Thực hiện tác vụ bất đồng bộ
+</span></span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">success</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">success</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">resolve</span>(<span style="color:#e6db74">&#39;Thành công!&#39;</span>);
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">reject</span>(<span style="color:#e6db74">&#39;Có lỗi xảy ra!&#39;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>});
+</span></span></code></pre></div><h3 id="3-trạng-thái-của-promise">3 trạng thái của Promise
+</h3><ol>
+<li><strong>Pending</strong>: Đang chờ xử lý</li>
+<li><strong>Fulfilled</strong>: Hoàn thành thành công (resolve được gọi)</li>
+<li><strong>Rejected</strong>: Thất bại (reject được gọi)</li>
+</ol>
+<h2 id="sử-dụng-promise">Sử dụng Promise
+</h2><h3 id="then-và-catch">then() và catch()
+</h3><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#a6e22e">myPromise</span>
+</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">result</span> =&gt; {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">result</span>); <span style="color:#75715e">// &#34;Thành công!&#34;
+</span></span></span><span style="display:flex;"><span>    })
+</span></span><span style="display:flex;"><span>    .<span style="color:#66d9ef">catch</span>(<span style="color:#a6e22e">error</span> =&gt; {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">error</span>(<span style="color:#a6e22e">error</span>);
+</span></span><span style="display:flex;"><span>    });
+</span></span></code></pre></div><h3 id="ví-dụ-thực-tế-fetch-api">Ví dụ thực tế: Fetch API
+</h3><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#a6e22e">fetch</span>(<span style="color:#e6db74">&#39;https://api.example.com/users&#39;</span>)
+</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">response</span> =&gt; <span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">json</span>())
+</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">users</span> =&gt; {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;Danh sách users:&#39;</span>, <span style="color:#a6e22e">users</span>);
+</span></span><span style="display:flex;"><span>    })
+</span></span><span style="display:flex;"><span>    .<span style="color:#66d9ef">catch</span>(<span style="color:#a6e22e">error</span> =&gt; {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">error</span>(<span style="color:#e6db74">&#39;Lỗi:&#39;</span>, <span style="color:#a6e22e">error</span>);
+</span></span><span style="display:flex;"><span>    });
+</span></span></code></pre></div><h2 id="promise-chaining">Promise Chaining
+</h2><p>Promise có thể chain (nối tiếp) để thực hiện nhiều tác vụ tuần tự:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#a6e22e">getUser</span>(<span style="color:#a6e22e">userId</span>)
+</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">user</span> =&gt; {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;User:&#39;</span>, <span style="color:#a6e22e">user</span>.<span style="color:#a6e22e">name</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">getOrders</span>(<span style="color:#a6e22e">user</span>.<span style="color:#a6e22e">id</span>);
+</span></span><span style="display:flex;"><span>    })
+</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">orders</span> =&gt; {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;Orders:&#39;</span>, <span style="color:#a6e22e">orders</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">getOrderDetails</span>(<span style="color:#a6e22e">orders</span>[<span style="color:#ae81ff">0</span>].<span style="color:#a6e22e">id</span>);
+</span></span><span style="display:flex;"><span>    })
+</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">details</span> =&gt; {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;Order Details:&#39;</span>, <span style="color:#a6e22e">details</span>);
+</span></span><span style="display:flex;"><span>    })
+</span></span><span style="display:flex;"><span>    .<span style="color:#66d9ef">catch</span>(<span style="color:#a6e22e">error</span> =&gt; {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">error</span>(<span style="color:#e6db74">&#39;Error:&#39;</span>, <span style="color:#a6e22e">error</span>);
+</span></span><span style="display:flex;"><span>    });
+</span></span></code></pre></div><p><strong>Lưu ý:</strong> Phải <code>return</code> Promise trong <code>.then()</code> để chain tiếp.</p>
+<h2 id="các-phương-thức-promise-tĩnh">Các phương thức Promise tĩnh
+</h2><h3 id="promiseall">Promise.all()
+</h3><p>Chờ <strong>tất cả</strong> promises hoàn thành:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">promise1</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">fetch</span>(<span style="color:#e6db74">&#39;/api/users&#39;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">promise2</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">fetch</span>(<span style="color:#e6db74">&#39;/api/products&#39;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">promise3</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">fetch</span>(<span style="color:#e6db74">&#39;/api/orders&#39;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Promise.<span style="color:#a6e22e">all</span>([<span style="color:#a6e22e">promise1</span>, <span style="color:#a6e22e">promise2</span>, <span style="color:#a6e22e">promise3</span>])
+</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">then</span>(([<span style="color:#a6e22e">users</span>, <span style="color:#a6e22e">products</span>, <span style="color:#a6e22e">orders</span>]) =&gt; {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;Tất cả đã load xong!&#39;</span>);
+</span></span><span style="display:flex;"><span>    })
+</span></span><span style="display:flex;"><span>    .<span style="color:#66d9ef">catch</span>(<span style="color:#a6e22e">error</span> =&gt; {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">error</span>(<span style="color:#e6db74">&#39;Có ít nhất 1 promise lỗi:&#39;</span>, <span style="color:#a6e22e">error</span>);
+</span></span><span style="display:flex;"><span>    });
+</span></span></code></pre></div><p><strong>Lưu ý:</strong> Nếu 1 promise reject, toàn bộ <code>Promise.all()</code> sẽ reject.</p>
+<h3 id="promiseallsettled">Promise.allSettled()
+</h3><p>Chờ tất cả promises hoàn thành (dù thành công hay thất bại):</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">promises</span> <span style="color:#f92672">=</span> [
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">fetch</span>(<span style="color:#e6db74">&#39;/api/users&#39;</span>),
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">fetch</span>(<span style="color:#e6db74">&#39;/api/invalid-endpoint&#39;</span>),
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">fetch</span>(<span style="color:#e6db74">&#39;/api/products&#39;</span>)
+</span></span><span style="display:flex;"><span>];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Promise.<span style="color:#a6e22e">allSettled</span>(<span style="color:#a6e22e">promises</span>)
+</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">results</span> =&gt; {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">results</span>.<span style="color:#a6e22e">forEach</span>((<span style="color:#a6e22e">result</span>, <span style="color:#a6e22e">index</span>) =&gt; {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">result</span>.<span style="color:#a6e22e">status</span> <span style="color:#f92672">===</span> <span style="color:#e6db74">&#39;fulfilled&#39;</span>) {
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">`Promise </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">index</span><span style="color:#e6db74">}</span><span style="color:#e6db74"> thành công:`</span>, <span style="color:#a6e22e">result</span>.<span style="color:#a6e22e">value</span>);
+</span></span><span style="display:flex;"><span>            } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">`Promise </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">index</span><span style="color:#e6db74">}</span><span style="color:#e6db74"> thất bại:`</span>, <span style="color:#a6e22e">result</span>.<span style="color:#a6e22e">reason</span>);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        });
+</span></span><span style="display:flex;"><span>    });
+</span></span></code></pre></div><h3 id="promiserace">Promise.race()
+</h3><p>Trả về kết quả của promise <strong>hoàn thành đầu tiên</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">promise1</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Promise(<span style="color:#a6e22e">resolve</span> =&gt; <span style="color:#a6e22e">setTimeout</span>(() =&gt; <span style="color:#a6e22e">resolve</span>(<span style="color:#e6db74">&#39;Chậm&#39;</span>), <span style="color:#ae81ff">2000</span>));
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">promise2</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Promise(<span style="color:#a6e22e">resolve</span> =&gt; <span style="color:#a6e22e">setTimeout</span>(() =&gt; <span style="color:#a6e22e">resolve</span>(<span style="color:#e6db74">&#39;Nhanh&#39;</span>), <span style="color:#ae81ff">500</span>));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Promise.<span style="color:#a6e22e">race</span>([<span style="color:#a6e22e">promise1</span>, <span style="color:#a6e22e">promise2</span>])
+</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">result</span> =&gt; {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">result</span>); <span style="color:#75715e">// &#34;Nhanh&#34;
+</span></span></span><span style="display:flex;"><span>    });
+</span></span></code></pre></div><p><strong>Use case:</strong> Timeout cho requests:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">fetchWithTimeout</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">url</span>, <span style="color:#a6e22e">timeout</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">5000</span>) =&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> Promise.<span style="color:#a6e22e">race</span>([
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">fetch</span>(<span style="color:#a6e22e">url</span>),
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">new</span> Promise((<span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">reject</span>) =&gt; 
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">setTimeout</span>(() =&gt; <span style="color:#a6e22e">reject</span>(<span style="color:#66d9ef">new</span> Error(<span style="color:#e6db74">&#39;Timeout!&#39;</span>)), <span style="color:#a6e22e">timeout</span>)
+</span></span><span style="display:flex;"><span>        )
+</span></span><span style="display:flex;"><span>    ]);
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><h3 id="promiseany">Promise.any()
+</h3><p>Trả về promise <strong>thành công đầu tiên</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">promise1</span> <span style="color:#f92672">=</span> Promise.<span style="color:#a6e22e">reject</span>(<span style="color:#e6db74">&#39;Lỗi 1&#39;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">promise2</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Promise(<span style="color:#a6e22e">resolve</span> =&gt; <span style="color:#a6e22e">setTimeout</span>(() =&gt; <span style="color:#a6e22e">resolve</span>(<span style="color:#e6db74">&#39;OK&#39;</span>), <span style="color:#ae81ff">1000</span>));
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">promise3</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Promise(<span style="color:#a6e22e">resolve</span> =&gt; <span style="color:#a6e22e">setTimeout</span>(() =&gt; <span style="color:#a6e22e">resolve</span>(<span style="color:#e6db74">&#39;OK 2&#39;</span>), <span style="color:#ae81ff">2000</span>));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Promise.<span style="color:#a6e22e">any</span>([<span style="color:#a6e22e">promise1</span>, <span style="color:#a6e22e">promise2</span>, <span style="color:#a6e22e">promise3</span>])
+</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">result</span> =&gt; {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">result</span>); <span style="color:#75715e">// &#34;OK&#34;
+</span></span></span><span style="display:flex;"><span>    });
+</span></span></code></pre></div><h2 id="xử-lý-lỗi-nâng-cao">Xử lý lỗi nâng cao
+</h2><h3 id="finally">finally()
+</h3><p>Luôn chạy dù Promise thành công hay thất bại:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#a6e22e">fetch</span>(<span style="color:#e6db74">&#39;/api/data&#39;</span>)
+</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">response</span> =&gt; <span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">json</span>())
+</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">data</span> =&gt; {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">data</span>);
+</span></span><span style="display:flex;"><span>    })
+</span></span><span style="display:flex;"><span>    .<span style="color:#66d9ef">catch</span>(<span style="color:#a6e22e">error</span> =&gt; {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">error</span>(<span style="color:#a6e22e">error</span>);
+</span></span><span style="display:flex;"><span>    })
+</span></span><span style="display:flex;"><span>    .<span style="color:#66d9ef">finally</span>(() =&gt; {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;Cleanup code - luôn chạy&#39;</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">hideLoadingSpinner</span>();
+</span></span><span style="display:flex;"><span>    });
+</span></span></code></pre></div><h3 id="xử-lý-lỗi-trong-chain">Xử lý lỗi trong chain
+</h3><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#a6e22e">getUserData</span>(<span style="color:#a6e22e">userId</span>)
+</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">user</span> =&gt; {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">user</span>.<span style="color:#a6e22e">isActive</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> Error(<span style="color:#e6db74">&#39;User không active&#39;</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">user</span>;
+</span></span><span style="display:flex;"><span>    })
+</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">user</span> =&gt; <span style="color:#a6e22e">getOrders</span>(<span style="color:#a6e22e">user</span>.<span style="color:#a6e22e">id</span>))
+</span></span><span style="display:flex;"><span>    .<span style="color:#66d9ef">catch</span>(<span style="color:#a6e22e">error</span> =&gt; {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">error</span>(<span style="color:#e6db74">&#39;Lỗi:&#39;</span>, <span style="color:#a6e22e">error</span>.<span style="color:#a6e22e">message</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Có thể return giá trị mặc định
+</span></span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> [];
+</span></span><span style="display:flex;"><span>    })
+</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">orders</span> =&gt; {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;Orders:&#39;</span>, <span style="color:#a6e22e">orders</span>);
+</span></span><span style="display:flex;"><span>    });
+</span></span></code></pre></div><h2 id="ví-dụ-thực-tế">Ví dụ thực tế
+</h2><h3 id="1-api-call-với-error-handling">1. API Call với error handling
+</h3><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">fetchUserData</span>(<span style="color:#a6e22e">userId</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">fetch</span>(<span style="color:#e6db74">`/api/users/</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">userId</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>)
+</span></span><span style="display:flex;"><span>        .<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">response</span> =&gt; {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">ok</span>) {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> Error(<span style="color:#e6db74">`HTTP error! status: </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">status</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">json</span>();
+</span></span><span style="display:flex;"><span>        })
+</span></span><span style="display:flex;"><span>        .<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">data</span> =&gt; {
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;User data:&#39;</span>, <span style="color:#a6e22e">data</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">data</span>;
+</span></span><span style="display:flex;"><span>        })
+</span></span><span style="display:flex;"><span>        .<span style="color:#66d9ef">catch</span>(<span style="color:#a6e22e">error</span> =&gt; {
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">error</span>(<span style="color:#e6db74">&#39;Fetch error:&#39;</span>, <span style="color:#a6e22e">error</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">throw</span> <span style="color:#a6e22e">error</span>;
+</span></span><span style="display:flex;"><span>        });
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="2-load-nhiều-resources-song-song">2. Load nhiều resources song song
+</h3><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">async</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">loadDashboard</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> [<span style="color:#a6e22e">users</span>, <span style="color:#a6e22e">products</span>, <span style="color:#a6e22e">stats</span>] <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> Promise.<span style="color:#a6e22e">all</span>([
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">fetch</span>(<span style="color:#e6db74">&#39;/api/users&#39;</span>).<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">r</span> =&gt; <span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">json</span>()),
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">fetch</span>(<span style="color:#e6db74">&#39;/api/products&#39;</span>).<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">r</span> =&gt; <span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">json</span>()),
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">fetch</span>(<span style="color:#e6db74">&#39;/api/stats&#39;</span>).<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">r</span> =&gt; <span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">json</span>())
+</span></span><span style="display:flex;"><span>    ]);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> { <span style="color:#a6e22e">users</span>, <span style="color:#a6e22e">products</span>, <span style="color:#a6e22e">stats</span> };
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="3-retry-logic">3. Retry logic
+</h3><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">fetchWithRetry</span>(<span style="color:#a6e22e">url</span>, <span style="color:#a6e22e">retries</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">fetch</span>(<span style="color:#a6e22e">url</span>)
+</span></span><span style="display:flex;"><span>        .<span style="color:#66d9ef">catch</span>(<span style="color:#a6e22e">error</span> =&gt; {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">retries</span> <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">`Retry... (</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">retries</span><span style="color:#e6db74">}</span><span style="color:#e6db74"> lần còn lại)`</span>);
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">fetchWithRetry</span>(<span style="color:#a6e22e">url</span>, <span style="color:#a6e22e">retries</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">throw</span> <span style="color:#a6e22e">error</span>;
+</span></span><span style="display:flex;"><span>        });
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="promise-vs-asyncawait">Promise vs Async/Await
+</h2><p>Promise và async/await thường được dùng cùng nhau:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#75715e">// Với Promise
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getUser</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">fetch</span>(<span style="color:#e6db74">&#39;/api/user&#39;</span>)
+</span></span><span style="display:flex;"><span>        .<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">r</span> =&gt; <span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">json</span>())
+</span></span><span style="display:flex;"><span>        .<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">user</span> =&gt; {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">fetch</span>(<span style="color:#e6db74">`/api/orders/</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">user</span>.<span style="color:#a6e22e">id</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>);
+</span></span><span style="display:flex;"><span>        })
+</span></span><span style="display:flex;"><span>        .<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">r</span> =&gt; <span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">json</span>());
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Với Async/Await (dễ đọc hơn)
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">async</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getUser</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">userResponse</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">fetch</span>(<span style="color:#e6db74">&#39;/api/user&#39;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">user</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">userResponse</span>.<span style="color:#a6e22e">json</span>();
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">ordersResponse</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">fetch</span>(<span style="color:#e6db74">`/api/orders/</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">user</span>.<span style="color:#a6e22e">id</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">ordersResponse</span>.<span style="color:#a6e22e">json</span>();
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="best-practices">Best Practices
+</h2><ol>
+<li><strong>Luôn có .catch()</strong> để xử lý lỗi</li>
+<li><strong>Return promises</strong> trong .then() khi chain</li>
+<li><strong>Sử dụng finally()</strong> cho cleanup code</li>
+<li><strong>Dùng Promise.all()</strong> để chạy song song thay vì tuần tự</li>
+<li><strong>Cân nhắc async/await</strong> cho code dễ đọc hơn</li>
+<li><strong>Tránh nested promises</strong> - dùng chaining thay thế</li>
+</ol>
+<h2 id="kết-luận">Kết luận
+</h2><p>Promise là nền tảng của lập trình bất đồng bộ trong JavaScript hiện đại. Hiểu rõ Promise sẽ giúp bạn:</p>
+<ul>
+<li>Viết code bất đồng bộ rõ ràng hơn</li>
+<li>Xử lý lỗi tốt hơn</li>
+<li>Kết hợp tốt với async/await</li>
+<li>Tránh callback hell</li>
+</ul>
+<p>Hãy thực hành và làm quen với Promise để trở thành một JavaScript developer giỏi hơn!</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/javascript/">JavaScript</a>
+        
+            <a href="/tags/promise/">Promise</a>
+        
+            <a href="/tags/async/">Async</a>
+        
+            <a href="/tags/es6/">ES6</a>
+        
+            <a href="/tags/callback/">Callback</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2025 Khar34&#39;s Blog
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.33.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+    
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.c922af694cc257bf1ecc41c0dd7b0430f9114ec280ccf67cd2c6ad55f5316c4e.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

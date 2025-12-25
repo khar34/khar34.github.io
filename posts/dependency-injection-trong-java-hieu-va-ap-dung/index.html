@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="Dependency Injection là gì?\rDependency Injection (DI) là một design pattern quan trọng trong lập trình Java, giúp giảm sự phụ thuộc giữa các class và tăng tính linh hoạt của code. Thay vì một class tự tạo các đối tượng mà nó cần, các đối tượng này sẽ được &ldquo;inject&rdquo; (tiêm) vào từ bên ngoài.\nVấn đề khi không dùng DI\rHãy xem ví dụ sau:\npublic class UserService { private UserRepository repository = new UserRepository(); public User getUser(int id) { return repository.findById(id); } } Vấn đề:\n">
+<title>Dependency Injection trong Java: Hiểu và Áp Dụng</title>
+
+<link rel='canonical' href='https://khar34.github.com/posts/dependency-injection-trong-java-hieu-va-ap-dung/'>
+
+<link rel="stylesheet" href="/scss/style.min.b9e9128fec450ebccecc4ec9900157f32b85d0609bcd5ee3293968bcaa1235f2.css"><meta property='og:title' content="Dependency Injection trong Java: Hiểu và Áp Dụng">
+<meta property='og:description' content="Dependency Injection là gì?\rDependency Injection (DI) là một design pattern quan trọng trong lập trình Java, giúp giảm sự phụ thuộc giữa các class và tăng tính linh hoạt của code. Thay vì một class tự tạo các đối tượng mà nó cần, các đối tượng này sẽ được &ldquo;inject&rdquo; (tiêm) vào từ bên ngoài.\nVấn đề khi không dùng DI\rHãy xem ví dụ sau:\npublic class UserService { private UserRepository repository = new UserRepository(); public User getUser(int id) { return repository.findById(id); } } Vấn đề:\n">
+<meta property='og:url' content='https://khar34.github.com/posts/dependency-injection-trong-java-hieu-va-ap-dung/'>
+<meta property='og:site_name' content='Khar34&#39;s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='Java' /><meta property='article:tag' content='Dependency Injection' /><meta property='article:tag' content='Design Pattern' /><meta property='article:tag' content='Spring' /><meta property='article:tag' content='SOLID' /><meta property='article:published_time' content='2025-12-25T10:00:00&#43;07:00'/><meta property='article:modified_time' content='2025-12-25T10:00:00&#43;07:00'/>
+<meta name="twitter:title" content="Dependency Injection trong Java: Hiểu và Áp Dụng">
+<meta name="twitter:description" content="Dependency Injection là gì?\rDependency Injection (DI) là một design pattern quan trọng trong lập trình Java, giúp giảm sự phụ thuộc giữa các class và tăng tính linh hoạt của code. Thay vì một class tự tạo các đối tượng mà nó cần, các đối tượng này sẽ được &ldquo;inject&rdquo; (tiêm) vào từ bên ngoài.\nVấn đề khi không dùng DI\rHãy xem ví dụ sau:\npublic class UserService { private UserRepository repository = new UserRepository(); public User getUser(int id) { return repository.findById(id); } } Vấn đề:\n">
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column compact"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_5efb6e76a8135b55.png" width="300"
+                            height="222" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Khar34&#39;s Blog</a></h1>
+            <h2 class="site-description"></h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>Dark Mode</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/java/" >
+                Java
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/posts/dependency-injection-trong-java-hieu-va-ap-dung/">Dependency Injection trong Java: Hiểu và Áp Dụng</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published" datetime='2025-12-25T10:00:00&#43;07:00'>Dec 25, 2025</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    3 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h2 id="dependency-injection-là-gì">Dependency Injection là gì?
+</h2><p><strong>Dependency Injection (DI)</strong> là một design pattern quan trọng trong lập trình Java, giúp giảm sự phụ thuộc giữa các class và tăng tính linh hoạt của code. Thay vì một class tự tạo các đối tượng mà nó cần, các đối tượng này sẽ được &ldquo;inject&rdquo; (tiêm) vào từ bên ngoài.</p>
+<h2 id="vấn-đề-khi-không-dùng-di">Vấn đề khi không dùng DI
+</h2><p>Hãy xem ví dụ sau:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UserService</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> UserRepository repository <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> UserRepository();
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> User <span style="color:#a6e22e">getUser</span>(<span style="color:#66d9ef">int</span> id) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> repository.<span style="color:#a6e22e">findById</span>(id);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><strong>Vấn đề:</strong></p>
+<ul>
+<li><code>UserService</code> phụ thuộc chặt chẽ vào <code>UserRepository</code></li>
+<li>Khó test vì không thể mock <code>UserRepository</code></li>
+<li>Khó thay đổi implementation của <code>UserRepository</code></li>
+</ul>
+<h2 id="các-cách-implement-di">Các cách implement DI
+</h2><h3 id="1-constructor-injection-khuyên-dùng">1. Constructor Injection (Khuyên dùng)
+</h3><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UserService</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">final</span> UserRepository repository;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">UserService</span>(UserRepository repository) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">repository</span> <span style="color:#f92672">=</span> repository;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> User <span style="color:#a6e22e">getUser</span>(<span style="color:#66d9ef">int</span> id) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> repository.<span style="color:#a6e22e">findById</span>(id);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><strong>Ưu điểm:</strong></p>
+<ul>
+<li>Dependencies rõ ràng</li>
+<li>Có thể sử dụng <code>final</code> để đảm bảo immutability</li>
+<li>Dễ test</li>
+</ul>
+<h3 id="2-setter-injection">2. Setter Injection
+</h3><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UserService</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> UserRepository repository;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setRepository</span>(UserRepository repository) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">repository</span> <span style="color:#f92672">=</span> repository;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> User <span style="color:#a6e22e">getUser</span>(<span style="color:#66d9ef">int</span> id) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> repository.<span style="color:#a6e22e">findById</span>(id);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><strong>Ưu điểm:</strong></p>
+<ul>
+<li>Linh hoạt, có thể thay đổi dependency sau khi khởi tạo</li>
+</ul>
+<p><strong>Nhược điểm:</strong></p>
+<ul>
+<li>Không thể dùng <code>final</code></li>
+<li>Object có thể ở trạng thái không hợp lệ nếu quên set dependency</li>
+</ul>
+<h3 id="3-interface-injection">3. Interface Injection
+</h3><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">RepositoryInjector</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">injectRepository</span>(UserRepository repository);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UserService</span> <span style="color:#66d9ef">implements</span> RepositoryInjector {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> UserRepository repository;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Override</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">injectRepository</span>(UserRepository repository) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">repository</span> <span style="color:#f92672">=</span> repository;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="di-với-spring-framework">DI với Spring Framework
+</h2><p>Spring Framework tự động quản lý DI thông qua IoC Container:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@Service</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UserService</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">final</span> UserRepository repository;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Autowired</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">UserService</span>(UserRepository repository) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">repository</span> <span style="color:#f92672">=</span> repository;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> User <span style="color:#a6e22e">getUser</span>(<span style="color:#66d9ef">int</span> id) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> repository.<span style="color:#a6e22e">findById</span>(id);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@Repository</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UserRepository</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> User <span style="color:#a6e22e">findById</span>(<span style="color:#66d9ef">int</span> id) {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Implementation</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><strong>Lưu ý:</strong> Từ Spring 4.3+, nếu class chỉ có 1 constructor, <code>@Autowired</code> có thể bỏ qua.</p>
+<h2 id="lợi-ích-của-di">Lợi ích của DI
+</h2><h3 id="1-loose-coupling">1. Loose Coupling
+</h3><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#75715e">// Interface</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">PaymentService</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">processPayment</span>(<span style="color:#66d9ef">double</span> amount);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Implementations</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CreditCardPayment</span> <span style="color:#66d9ef">implements</span> PaymentService {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">processPayment</span>(<span style="color:#66d9ef">double</span> amount) {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Credit card logic</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">PayPalPayment</span> <span style="color:#66d9ef">implements</span> PaymentService {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">processPayment</span>(<span style="color:#66d9ef">double</span> amount) {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// PayPal logic</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Service</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">OrderService</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">final</span> PaymentService paymentService;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">OrderService</span>(PaymentService paymentService) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">paymentService</span> <span style="color:#f92672">=</span> paymentService;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">checkout</span>(<span style="color:#66d9ef">double</span> amount) {
+</span></span><span style="display:flex;"><span>        paymentService.<span style="color:#a6e22e">processPayment</span>(amount);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="2-dễ-test">2. Dễ Test
+</h3><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UserServiceTest</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Test</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">testGetUser</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Mock repository</span>
+</span></span><span style="display:flex;"><span>        UserRepository mockRepo <span style="color:#f92672">=</span> mock(UserRepository.<span style="color:#a6e22e">class</span>);
+</span></span><span style="display:flex;"><span>        when(mockRepo.<span style="color:#a6e22e">findById</span>(1)).<span style="color:#a6e22e">thenReturn</span>(<span style="color:#66d9ef">new</span> User(1, <span style="color:#e6db74">&#34;John&#34;</span>));
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Inject mock</span>
+</span></span><span style="display:flex;"><span>        UserService service <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> UserService(mockRepo);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Test</span>
+</span></span><span style="display:flex;"><span>        User user <span style="color:#f92672">=</span> service.<span style="color:#a6e22e">getUser</span>(1);
+</span></span><span style="display:flex;"><span>        assertEquals(<span style="color:#e6db74">&#34;John&#34;</span>, user.<span style="color:#a6e22e">getName</span>());
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="3-tăng-tính-tái-sử-dụng">3. Tăng tính tái sử dụng
+</h3><p>Dependencies có thể được tái sử dụng ở nhiều nơi mà không cần tạo lại.</p>
+<h2 id="di-thủ-công-vs-framework">DI thủ công vs Framework
+</h2><h3 id="di-thủ-công">DI thủ công
+</h3><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Application</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span> args) {
+</span></span><span style="display:flex;"><span>        UserRepository repository <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> UserRepository();
+</span></span><span style="display:flex;"><span>        UserService service <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> UserService(repository);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        User user <span style="color:#f92672">=</span> service.<span style="color:#a6e22e">getUser</span>(1);
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(user.<span style="color:#a6e22e">getName</span>());
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="với-spring">Với Spring
+</h3><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@SpringBootApplication</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Application</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span> args) {
+</span></span><span style="display:flex;"><span>        SpringApplication.<span style="color:#a6e22e">run</span>(Application.<span style="color:#a6e22e">class</span>, args);
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Spring tự động tạo và inject dependencies</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="best-practices">Best Practices
+</h2><ol>
+<li><strong>Ưu tiên Constructor Injection</strong> cho required dependencies</li>
+<li><strong>Dùng Interface</strong> thay vì concrete class</li>
+<li><strong>Tránh Field Injection</strong> trong production code (khó test)</li>
+<li><strong>Giữ dependencies ít nhất có thể</strong> - nếu class cần quá nhiều dependencies, có thể cần refactor</li>
+<li><strong>Sử dụng <code>final</code></strong> để đảm bảo immutability</li>
+</ol>
+<h2 id="kết-luận">Kết luận
+</h2><p>Dependency Injection là một pattern quan trọng giúp code Java của bạn:</p>
+<ul>
+<li>Dễ test hơn</li>
+<li>Linh hoạt hơn</li>
+<li>Dễ maintain hơn</li>
+<li>Tuân thủ SOLID principles</li>
+</ul>
+<p>Với Spring Framework, DI trở nên đơn giản và mạnh mẽ hơn. Hãy bắt đầu áp dụng DI vào dự án của bạn ngay hôm nay!</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/java/">Java</a>
+        
+            <a href="/tags/dependency-injection/">Dependency Injection</a>
+        
+            <a href="/tags/design-pattern/">Design Pattern</a>
+        
+            <a href="/tags/spring/">Spring</a>
+        
+            <a href="/tags/solid/">SOLID</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2025 Khar34&#39;s Blog
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.33.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+    
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.c922af694cc257bf1ecc41c0dd7b0430f9114ec280ccf67cd2c6ad55f5316c4e.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

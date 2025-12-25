@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="Design Patterns là gì?\rDesign Patterns là các giải pháp thiết kế đã được chứng minh hiệu quả cho các vấn đề phổ biến trong lập trình. Patterns không phải là code có sẵn mà là templates giúp giải quyết vấn đề một cách tối ưu.\n3 nhóm Design Patterns\rCreational Patterns - Cách tạo objects Structural Patterns - Cách tổ chức classes/objects Behavioral Patterns - Cách objects tương tác Creational Patterns\r1. Singleton Pattern\rĐảm bảo class chỉ có 1 instance duy nhất.\n">
+<title>Design Patterns trong Java: Giải Pháp Thiết Kế Phổ Biến</title>
+
+<link rel='canonical' href='https://khar34.github.com/posts/design-patterns-trong-java-giai-phap-thiet-ke-pho-bien/'>
+
+<link rel="stylesheet" href="/scss/style.min.b9e9128fec450ebccecc4ec9900157f32b85d0609bcd5ee3293968bcaa1235f2.css"><meta property='og:title' content="Design Patterns trong Java: Giải Pháp Thiết Kế Phổ Biến">
+<meta property='og:description' content="Design Patterns là gì?\rDesign Patterns là các giải pháp thiết kế đã được chứng minh hiệu quả cho các vấn đề phổ biến trong lập trình. Patterns không phải là code có sẵn mà là templates giúp giải quyết vấn đề một cách tối ưu.\n3 nhóm Design Patterns\rCreational Patterns - Cách tạo objects Structural Patterns - Cách tổ chức classes/objects Behavioral Patterns - Cách objects tương tác Creational Patterns\r1. Singleton Pattern\rĐảm bảo class chỉ có 1 instance duy nhất.\n">
+<meta property='og:url' content='https://khar34.github.com/posts/design-patterns-trong-java-giai-phap-thiet-ke-pho-bien/'>
+<meta property='og:site_name' content='Khar34&#39;s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='Java' /><meta property='article:tag' content='Design Patterns' /><meta property='article:tag' content='OOP' /><meta property='article:tag' content='Software Architecture' /><meta property='article:tag' content='Best Practices' /><meta property='article:published_time' content='2025-12-25T14:00:00&#43;07:00'/><meta property='article:modified_time' content='2025-12-25T14:00:00&#43;07:00'/>
+<meta name="twitter:title" content="Design Patterns trong Java: Giải Pháp Thiết Kế Phổ Biến">
+<meta name="twitter:description" content="Design Patterns là gì?\rDesign Patterns là các giải pháp thiết kế đã được chứng minh hiệu quả cho các vấn đề phổ biến trong lập trình. Patterns không phải là code có sẵn mà là templates giúp giải quyết vấn đề một cách tối ưu.\n3 nhóm Design Patterns\rCreational Patterns - Cách tạo objects Structural Patterns - Cách tổ chức classes/objects Behavioral Patterns - Cách objects tương tác Creational Patterns\r1. Singleton Pattern\rĐảm bảo class chỉ có 1 instance duy nhất.\n">
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column compact"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_5efb6e76a8135b55.png" width="300"
+                            height="222" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Khar34&#39;s Blog</a></h1>
+            <h2 class="site-description"></h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>Dark Mode</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/java/" >
+                Java
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/posts/design-patterns-trong-java-giai-phap-thiet-ke-pho-bien/">Design Patterns trong Java: Giải Pháp Thiết Kế Phổ Biến</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published" datetime='2025-12-25T14:00:00&#43;07:00'>Dec 25, 2025</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    8 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h2 id="design-patterns-là-gì">Design Patterns là gì?
+</h2><p><strong>Design Patterns</strong> là các giải pháp thiết kế đã được chứng minh hiệu quả cho các vấn đề phổ biến trong lập trình. Patterns không phải là code có sẵn mà là templates giúp giải quyết vấn đề một cách tối ưu.</p>
+<h2 id="3-nhóm-design-patterns">3 nhóm Design Patterns
+</h2><ol>
+<li><strong>Creational Patterns</strong> - Cách tạo objects</li>
+<li><strong>Structural Patterns</strong> - Cách tổ chức classes/objects</li>
+<li><strong>Behavioral Patterns</strong> - Cách objects tương tác</li>
+</ol>
+<h2 id="creational-patterns">Creational Patterns
+</h2><h3 id="1-singleton-pattern">1. Singleton Pattern
+</h3><p>Đảm bảo class chỉ có <strong>1 instance duy nhất</strong>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Database</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> Database instance;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">Database</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Private constructor</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> Database <span style="color:#a6e22e">getInstance</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (instance <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span>) {
+</span></span><span style="display:flex;"><span>            instance <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Database();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> instance;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">query</span>(String sql) {
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Executing: &#34;</span> <span style="color:#f92672">+</span> sql);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Sử dụng</span>
+</span></span><span style="display:flex;"><span>Database db1 <span style="color:#f92672">=</span> Database.<span style="color:#a6e22e">getInstance</span>();
+</span></span><span style="display:flex;"><span>Database db2 <span style="color:#f92672">=</span> Database.<span style="color:#a6e22e">getInstance</span>();
+</span></span><span style="display:flex;"><span>System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(db1 <span style="color:#f92672">==</span> db2); <span style="color:#75715e">// true - cùng 1 instance</span>
+</span></span></code></pre></div><p><strong>Thread-safe version:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Database</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">volatile</span> Database instance;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">Database</span>() {}
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> Database <span style="color:#a6e22e">getInstance</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (instance <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">synchronized</span> (Database.<span style="color:#a6e22e">class</span>) {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> (instance <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span>) {
+</span></span><span style="display:flex;"><span>                    instance <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Database();
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> instance;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><strong>Khi nào dùng:</strong></p>
+<ul>
+<li>Database connections</li>
+<li>Configuration</li>
+<li>Logging</li>
+<li>Cache</li>
+</ul>
+<h3 id="2-factory-pattern">2. Factory Pattern
+</h3><p>Tạo objects mà không cần chỉ định exact class.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#75715e">// Product interface</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">Animal</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">makeSound</span>();
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Concrete products</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Dog</span> <span style="color:#66d9ef">implements</span> Animal {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Override</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">makeSound</span>() {
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Woof!&#34;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Cat</span> <span style="color:#66d9ef">implements</span> Animal {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Override</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">makeSound</span>() {
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Meow!&#34;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Factory</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">AnimalFactory</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> Animal <span style="color:#a6e22e">createAnimal</span>(String type) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">switch</span> (type.<span style="color:#a6e22e">toLowerCase</span>()) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#34;dog&#34;</span>:
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> Dog();
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#34;cat&#34;</span>:
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> Cat();
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">default</span>:
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> IllegalArgumentException(<span style="color:#e6db74">&#34;Unknown animal type&#34;</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Sử dụng</span>
+</span></span><span style="display:flex;"><span>Animal dog <span style="color:#f92672">=</span> AnimalFactory.<span style="color:#a6e22e">createAnimal</span>(<span style="color:#e6db74">&#34;dog&#34;</span>);
+</span></span><span style="display:flex;"><span>dog.<span style="color:#a6e22e">makeSound</span>(); <span style="color:#75715e">// &#34;Woof!&#34;</span>
+</span></span></code></pre></div><p><strong>Khi nào dùng:</strong></p>
+<ul>
+<li>Không biết trước loại object cần tạo</li>
+<li>Logic tạo object phức tạp</li>
+<li>Muốn encapsulate object creation</li>
+</ul>
+<h3 id="3-builder-pattern">3. Builder Pattern
+</h3><p>Xây dựng complex objects từng bước.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">User</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Required</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">final</span> String username;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">final</span> String email;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Optional</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">final</span> String firstName;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">final</span> String lastName;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">int</span> age;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">final</span> String phone;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">User</span>(Builder builder) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">username</span> <span style="color:#f92672">=</span> builder.<span style="color:#a6e22e">username</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">email</span> <span style="color:#f92672">=</span> builder.<span style="color:#a6e22e">email</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">firstName</span> <span style="color:#f92672">=</span> builder.<span style="color:#a6e22e">firstName</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">lastName</span> <span style="color:#f92672">=</span> builder.<span style="color:#a6e22e">lastName</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">age</span> <span style="color:#f92672">=</span> builder.<span style="color:#a6e22e">age</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">phone</span> <span style="color:#f92672">=</span> builder.<span style="color:#a6e22e">phone</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Builder</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Required</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">final</span> String username;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">final</span> String email;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Optional</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> String firstName <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> String lastName <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> age <span style="color:#f92672">=</span> 0;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> String phone <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Builder</span>(String username, String email) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">username</span> <span style="color:#f92672">=</span> username;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">email</span> <span style="color:#f92672">=</span> email;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> Builder <span style="color:#a6e22e">firstName</span>(String firstName) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">firstName</span> <span style="color:#f92672">=</span> firstName;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> Builder <span style="color:#a6e22e">lastName</span>(String lastName) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">lastName</span> <span style="color:#f92672">=</span> lastName;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> Builder <span style="color:#a6e22e">age</span>(<span style="color:#66d9ef">int</span> age) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">age</span> <span style="color:#f92672">=</span> age;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> Builder <span style="color:#a6e22e">phone</span>(String phone) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">phone</span> <span style="color:#f92672">=</span> phone;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> User <span style="color:#a6e22e">build</span>() {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> User(<span style="color:#66d9ef">this</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Sử dụng</span>
+</span></span><span style="display:flex;"><span>User user <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> User.<span style="color:#a6e22e">Builder</span>(<span style="color:#e6db74">&#34;john_doe&#34;</span>, <span style="color:#e6db74">&#34;john@example.com&#34;</span>)
+</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">firstName</span>(<span style="color:#e6db74">&#34;John&#34;</span>)
+</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">lastName</span>(<span style="color:#e6db74">&#34;Doe&#34;</span>)
+</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">age</span>(30)
+</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">phone</span>(<span style="color:#e6db74">&#34;123-456-7890&#34;</span>)
+</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">build</span>();
+</span></span></code></pre></div><p><strong>Khi nào dùng:</strong></p>
+<ul>
+<li>Nhiều constructor parameters</li>
+<li>Nhiều optional parameters</li>
+<li>Cần immutable objects</li>
+</ul>
+<h2 id="structural-patterns">Structural Patterns
+</h2><h3 id="4-adapter-pattern">4. Adapter Pattern
+</h3><p>Chuyển đổi interface này sang interface khác.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#75715e">// Target interface</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">MediaPlayer</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">play</span>(String filename);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Adaptee (class cần adapt)</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">VLCPlayer</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">playVLC</span>(String filename) {
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Playing VLC file: &#34;</span> <span style="color:#f92672">+</span> filename);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Adapter</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">VLCAdapter</span> <span style="color:#66d9ef">implements</span> MediaPlayer {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> VLCPlayer vlcPlayer;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">VLCAdapter</span>(VLCPlayer vlcPlayer) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">vlcPlayer</span> <span style="color:#f92672">=</span> vlcPlayer;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Override</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">play</span>(String filename) {
+</span></span><span style="display:flex;"><span>        vlcPlayer.<span style="color:#a6e22e">playVLC</span>(filename);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Client</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">AudioPlayer</span> <span style="color:#66d9ef">implements</span> MediaPlayer {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Override</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">play</span>(String filename) {
+</span></span><span style="display:flex;"><span>        String extension <span style="color:#f92672">=</span> filename.<span style="color:#a6e22e">substring</span>(filename.<span style="color:#a6e22e">lastIndexOf</span>(<span style="color:#e6db74">&#39;.&#39;</span>) <span style="color:#f92672">+</span> 1);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (extension.<span style="color:#a6e22e">equals</span>(<span style="color:#e6db74">&#34;mp3&#34;</span>)) {
+</span></span><span style="display:flex;"><span>            System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Playing MP3: &#34;</span> <span style="color:#f92672">+</span> filename);
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (extension.<span style="color:#a6e22e">equals</span>(<span style="color:#e6db74">&#34;vlc&#34;</span>)) {
+</span></span><span style="display:flex;"><span>            MediaPlayer adapter <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> VLCAdapter(<span style="color:#66d9ef">new</span> VLCPlayer());
+</span></span><span style="display:flex;"><span>            adapter.<span style="color:#a6e22e">play</span>(filename);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Sử dụng</span>
+</span></span><span style="display:flex;"><span>AudioPlayer player <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> AudioPlayer();
+</span></span><span style="display:flex;"><span>player.<span style="color:#a6e22e">play</span>(<span style="color:#e6db74">&#34;song.mp3&#34;</span>);
+</span></span><span style="display:flex;"><span>player.<span style="color:#a6e22e">play</span>(<span style="color:#e6db74">&#34;movie.vlc&#34;</span>);
+</span></span></code></pre></div><p><strong>Khi nào dùng:</strong></p>
+<ul>
+<li>Integrate với third-party libraries</li>
+<li>Legacy code compatibility</li>
+<li>Multiple incompatible interfaces</li>
+</ul>
+<h3 id="5-decorator-pattern">5. Decorator Pattern
+</h3><p>Thêm functionality cho objects động.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#75715e">// Component</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">Coffee</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">double</span> <span style="color:#a6e22e">getCost</span>();
+</span></span><span style="display:flex;"><span>    String <span style="color:#a6e22e">getDescription</span>();
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Concrete Component</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SimpleCoffee</span> <span style="color:#66d9ef">implements</span> Coffee {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Override</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">double</span> <span style="color:#a6e22e">getCost</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> 2.<span style="color:#a6e22e">0</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Override</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">getDescription</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;Simple Coffee&#34;</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Decorator</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">abstract</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CoffeeDecorator</span> <span style="color:#66d9ef">implements</span> Coffee {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">protected</span> Coffee decoratedCoffee;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">CoffeeDecorator</span>(Coffee coffee) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">decoratedCoffee</span> <span style="color:#f92672">=</span> coffee;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Override</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">double</span> <span style="color:#a6e22e">getCost</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> decoratedCoffee.<span style="color:#a6e22e">getCost</span>();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Override</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">getDescription</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> decoratedCoffee.<span style="color:#a6e22e">getDescription</span>();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Concrete Decorators</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MilkDecorator</span> <span style="color:#66d9ef">extends</span> CoffeeDecorator {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">MilkDecorator</span>(Coffee coffee) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">super</span>(coffee);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Override</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">double</span> <span style="color:#a6e22e">getCost</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">super</span>.<span style="color:#a6e22e">getCost</span>() <span style="color:#f92672">+</span> 0.<span style="color:#a6e22e">5</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Override</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">getDescription</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">super</span>.<span style="color:#a6e22e">getDescription</span>() <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;, Milk&#34;</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SugarDecorator</span> <span style="color:#66d9ef">extends</span> CoffeeDecorator {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">SugarDecorator</span>(Coffee coffee) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">super</span>(coffee);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Override</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">double</span> <span style="color:#a6e22e">getCost</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">super</span>.<span style="color:#a6e22e">getCost</span>() <span style="color:#f92672">+</span> 0.<span style="color:#a6e22e">2</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Override</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">getDescription</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">super</span>.<span style="color:#a6e22e">getDescription</span>() <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;, Sugar&#34;</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Sử dụng</span>
+</span></span><span style="display:flex;"><span>Coffee coffee <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> SimpleCoffee();
+</span></span><span style="display:flex;"><span>System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(coffee.<span style="color:#a6e22e">getDescription</span>() <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; $&#34;</span> <span style="color:#f92672">+</span> coffee.<span style="color:#a6e22e">getCost</span>());
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>coffee <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> MilkDecorator(coffee);
+</span></span><span style="display:flex;"><span>coffee <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> SugarDecorator(coffee);
+</span></span><span style="display:flex;"><span>System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(coffee.<span style="color:#a6e22e">getDescription</span>() <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; $&#34;</span> <span style="color:#f92672">+</span> coffee.<span style="color:#a6e22e">getCost</span>());
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Output: &#34;Simple Coffee, Milk, Sugar $2.7&#34;</span>
+</span></span></code></pre></div><p><strong>Khi nào dùng:</strong></p>
+<ul>
+<li>Thêm responsibilities động</li>
+<li>Tránh subclass explosion</li>
+<li>Extend functionality mà không modify code</li>
+</ul>
+<h3 id="6-facade-pattern">6. Facade Pattern
+</h3><p>Cung cấp interface đơn giản cho subsystem phức tạp.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#75715e">// Complex subsystems</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CPU</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">start</span>() {
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;CPU started&#34;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Memory</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">load</span>() {
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Memory loaded&#34;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">HardDrive</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">read</span>() {
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Hard drive read&#34;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Facade</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ComputerFacade</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> CPU cpu;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Memory memory;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> HardDrive hardDrive;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">ComputerFacade</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">cpu</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> CPU();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">memory</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Memory();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">hardDrive</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> HardDrive();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">start</span>() {
+</span></span><span style="display:flex;"><span>        cpu.<span style="color:#a6e22e">start</span>();
+</span></span><span style="display:flex;"><span>        memory.<span style="color:#a6e22e">load</span>();
+</span></span><span style="display:flex;"><span>        hardDrive.<span style="color:#a6e22e">read</span>();
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Computer started!&#34;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Client</span>
+</span></span><span style="display:flex;"><span>ComputerFacade computer <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ComputerFacade();
+</span></span><span style="display:flex;"><span>computer.<span style="color:#a6e22e">start</span>(); <span style="color:#75715e">// Đơn giản!</span>
+</span></span></code></pre></div><h2 id="behavioral-patterns">Behavioral Patterns
+</h2><h3 id="7-observer-pattern">7. Observer Pattern
+</h3><p>Notification system khi state thay đổi.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.*;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Observer interface</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">Observer</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">update</span>(String message);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Subject</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">NewsAgency</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> List<span style="color:#f92672">&lt;</span>Observer<span style="color:#f92672">&gt;</span> observers <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ArrayList<span style="color:#f92672">&lt;&gt;</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> String news;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">addObserver</span>(Observer observer) {
+</span></span><span style="display:flex;"><span>        observers.<span style="color:#a6e22e">add</span>(observer);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">removeObserver</span>(Observer observer) {
+</span></span><span style="display:flex;"><span>        observers.<span style="color:#a6e22e">remove</span>(observer);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setNews</span>(String news) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">news</span> <span style="color:#f92672">=</span> news;
+</span></span><span style="display:flex;"><span>        notifyObservers();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">notifyObservers</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (Observer observer : observers) {
+</span></span><span style="display:flex;"><span>            observer.<span style="color:#a6e22e">update</span>(news);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Concrete Observers</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">NewsChannel</span> <span style="color:#66d9ef">implements</span> Observer {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> String name;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">NewsChannel</span>(String name) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">name</span> <span style="color:#f92672">=</span> name;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Override</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">update</span>(String news) {
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(name <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; received news: &#34;</span> <span style="color:#f92672">+</span> news);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Sử dụng</span>
+</span></span><span style="display:flex;"><span>NewsAgency agency <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> NewsAgency();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>NewsChannel channel1 <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> NewsChannel(<span style="color:#e6db74">&#34;CNN&#34;</span>);
+</span></span><span style="display:flex;"><span>NewsChannel channel2 <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> NewsChannel(<span style="color:#e6db74">&#34;BBC&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>agency.<span style="color:#a6e22e">addObserver</span>(channel1);
+</span></span><span style="display:flex;"><span>agency.<span style="color:#a6e22e">addObserver</span>(channel2);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>agency.<span style="color:#a6e22e">setNews</span>(<span style="color:#e6db74">&#34;Breaking: Important event!&#34;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Output:</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// CNN received news: Breaking: Important event!</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// BBC received news: Breaking: Important event!</span>
+</span></span></code></pre></div><p><strong>Khi nào dùng:</strong></p>
+<ul>
+<li>Event handling</li>
+<li>Model-View updates</li>
+<li>Pub-Sub systems</li>
+</ul>
+<h3 id="8-strategy-pattern">8. Strategy Pattern
+</h3><p>Encapsulate algorithms, có thể swap được.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#75715e">// Strategy interface</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">PaymentStrategy</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">pay</span>(<span style="color:#66d9ef">int</span> amount);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Concrete Strategies</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CreditCardPayment</span> <span style="color:#66d9ef">implements</span> PaymentStrategy {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> String cardNumber;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">CreditCardPayment</span>(String cardNumber) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">cardNumber</span> <span style="color:#f92672">=</span> cardNumber;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Override</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">pay</span>(<span style="color:#66d9ef">int</span> amount) {
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Paid $&#34;</span> <span style="color:#f92672">+</span> amount <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; with credit card: &#34;</span> <span style="color:#f92672">+</span> cardNumber);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">PayPalPayment</span> <span style="color:#66d9ef">implements</span> PaymentStrategy {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> String email;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">PayPalPayment</span>(String email) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">email</span> <span style="color:#f92672">=</span> email;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Override</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">pay</span>(<span style="color:#66d9ef">int</span> amount) {
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Paid $&#34;</span> <span style="color:#f92672">+</span> amount <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; via PayPal: &#34;</span> <span style="color:#f92672">+</span> email);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Context</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ShoppingCart</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> PaymentStrategy paymentStrategy;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setPaymentStrategy</span>(PaymentStrategy strategy) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">paymentStrategy</span> <span style="color:#f92672">=</span> strategy;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">checkout</span>(<span style="color:#66d9ef">int</span> amount) {
+</span></span><span style="display:flex;"><span>        paymentStrategy.<span style="color:#a6e22e">pay</span>(amount);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Sử dụng</span>
+</span></span><span style="display:flex;"><span>ShoppingCart cart <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ShoppingCart();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>cart.<span style="color:#a6e22e">setPaymentStrategy</span>(<span style="color:#66d9ef">new</span> CreditCardPayment(<span style="color:#e6db74">&#34;1234-5678&#34;</span>));
+</span></span><span style="display:flex;"><span>cart.<span style="color:#a6e22e">checkout</span>(100);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>cart.<span style="color:#a6e22e">setPaymentStrategy</span>(<span style="color:#66d9ef">new</span> PayPalPayment(<span style="color:#e6db74">&#34;user@example.com&#34;</span>));
+</span></span><span style="display:flex;"><span>cart.<span style="color:#a6e22e">checkout</span>(50);
+</span></span></code></pre></div><p><strong>Khi nào dùng:</strong></p>
+<ul>
+<li>Nhiều algorithms tương tự</li>
+<li>Conditional statements phức tạp</li>
+<li>Runtime algorithm selection</li>
+</ul>
+<h3 id="9-template-method-pattern">9. Template Method Pattern
+</h3><p>Define skeleton của algorithm, để subclasses override steps.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">abstract</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DataProcessor</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Template method</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">process</span>() {
+</span></span><span style="display:flex;"><span>        readData();
+</span></span><span style="display:flex;"><span>        processData();
+</span></span><span style="display:flex;"><span>        saveData();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">abstract</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">readData</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">abstract</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">processData</span>();
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Hook method (optional override)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">saveData</span>() {
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Saving data to database&#34;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CSVProcessor</span> <span style="color:#66d9ef">extends</span> DataProcessor {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Override</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">readData</span>() {
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Reading CSV file&#34;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Override</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">processData</span>() {
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Processing CSV data&#34;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">JSONProcessor</span> <span style="color:#66d9ef">extends</span> DataProcessor {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Override</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">readData</span>() {
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Reading JSON file&#34;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Override</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">processData</span>() {
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Processing JSON data&#34;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Override</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">saveData</span>() {
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Saving to NoSQL database&#34;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Sử dụng</span>
+</span></span><span style="display:flex;"><span>DataProcessor csvProcessor <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> CSVProcessor();
+</span></span><span style="display:flex;"><span>csvProcessor.<span style="color:#a6e22e">process</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>DataProcessor jsonProcessor <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> JSONProcessor();
+</span></span><span style="display:flex;"><span>jsonProcessor.<span style="color:#a6e22e">process</span>();
+</span></span></code></pre></div><h2 id="tổng-hợp-best-practices">Tổng hợp Best Practices
+</h2><h3 id="1-solid-principles">1. SOLID Principles
+</h3><p>Design patterns tuân thủ SOLID:</p>
+<ul>
+<li><strong>S</strong>ingle Responsibility</li>
+<li><strong>O</strong>pen/Closed</li>
+<li><strong>L</strong>iskov Substitution</li>
+<li><strong>I</strong>nterface Segregation</li>
+<li><strong>D</strong>ependency Inversion</li>
+</ul>
+<h3 id="2-khi-nào-dùng-patterns">2. Khi nào dùng patterns?
+</h3><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#75715e">// ❌ Over-engineering</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Đừng dùng pattern nếu simple solution đủ</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Calculator</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Không cần Factory chỉ để tạo Calculator!</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// ✅ Dùng khi cần</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Factory hợp lý khi có nhiều loại calculator</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">Calculator</span> {}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ScientificCalculator</span> <span style="color:#66d9ef">implements</span> Calculator {}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">BasicCalculator</span> <span style="color:#66d9ef">implements</span> Calculator {}
+</span></span></code></pre></div><h3 id="3-kết-hợp-patterns">3. Kết hợp patterns
+</h3><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#75715e">// Singleton + Factory</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DatabaseFactory</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> DatabaseFactory instance;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">DatabaseFactory</span>() {}
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> DatabaseFactory <span style="color:#a6e22e">getInstance</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (instance <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span>) {
+</span></span><span style="display:flex;"><span>            instance <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> DatabaseFactory();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> instance;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> Database <span style="color:#a6e22e">createDatabase</span>(String type) {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Factory logic</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="patterns-trong-spring-framework">Patterns trong Spring Framework
+</h2><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#75715e">// Singleton</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@Service</span> <span style="color:#75715e">// Spring tạo singleton bean</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UserService</span> {}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Factory</span>
+</span></span><span style="display:flex;"><span>ApplicationContext context <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> AnnotationConfigApplicationContext();
+</span></span><span style="display:flex;"><span>UserService service <span style="color:#f92672">=</span> context.<span style="color:#a6e22e">getBean</span>(UserService.<span style="color:#a6e22e">class</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Template Method</span>
+</span></span><span style="display:flex;"><span>JdbcTemplate jdbcTemplate;
+</span></span><span style="display:flex;"><span>jdbcTemplate.<span style="color:#a6e22e">query</span>(<span style="color:#e6db74">&#34;SELECT * FROM users&#34;</span>, <span style="color:#66d9ef">new</span> RowMapper<span style="color:#f92672">&lt;</span>User<span style="color:#f92672">&gt;</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Override mapping logic</span>
+</span></span><span style="display:flex;"><span>});
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Observer</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@EventListener</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">handleUserCreated</span>(UserCreatedEvent event) {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// React to event</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Proxy</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@Transactional</span> <span style="color:#75715e">// Spring tạo proxy để handle transactions</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">saveUser</span>(User user) {}
+</span></span></code></pre></div><h2 id="kết-luận">Kết luận
+</h2><p>Design Patterns giúp:</p>
+<ul>
+<li>Code dễ maintain và extend</li>
+<li>Communication giữa developers tốt hơn</li>
+<li>Tránh reinvent the wheel</li>
+<li>Best practices đã được chứng minh</li>
+</ul>
+<p><strong>Nhớ:</strong></p>
+<ul>
+<li>Không overuse patterns</li>
+<li>Hiểu vấn đề trước khi áp dụng</li>
+<li>Simple solution đôi khi tốt hơn complex pattern</li>
+</ul>
+<p>Nắm vững Design Patterns là bước quan trọng để trở thành Java developer chuyên nghiệp!</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/java/">Java</a>
+        
+            <a href="/tags/design-patterns/">Design Patterns</a>
+        
+            <a href="/tags/oop/">OOP</a>
+        
+            <a href="/tags/software-architecture/">Software Architecture</a>
+        
+            <a href="/tags/best-practices/">Best Practices</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">Related content</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/posts/exception-handling-trong-java-xu-ly-loi-chuyen-nghiep/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Exception Handling trong Java: Xử Lý Lỗi Chuyên Nghiệp</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/posts/multithreading-trong-java-lap-trinh-da-luong-hieu-qua/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Multithreading trong Java: Lập Trình Đa Luồng Hiệu Quả</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/posts/prototypes-trong-javascript-ke-thua-va-oop/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Prototypes trong JavaScript: Kế Thừa và OOP</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/posts/collections-framework-trong-java-lam-chu-cau-truc-du-lieu/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Collections Framework trong Java: Làm Chủ Cấu Trúc Dữ Liệu</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/posts/dependency-injection-trong-java-hieu-va-ap-dung/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Dependency Injection trong Java: Hiểu và Áp Dụng</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2025 Khar34&#39;s Blog
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.33.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+    
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.c922af694cc257bf1ecc41c0dd7b0430f9114ec280ccf67cd2c6ad55f5316c4e.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

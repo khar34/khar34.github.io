@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="Event Loop là gì?\rEvent Loop là cơ chế cốt lõi cho phép JavaScript xử lý các tác vụ bất đồng bộ mặc dù là single-threaded. Hiểu Event Loop giúp bạn nắm rõ cách JavaScript hoạt động &ldquo;dưới hood&rdquo;.\nJavaScript là Single-Threaded\rJavaScript chỉ có một thread duy nhất để thực thi code. Vậy làm sao nó có thể xử lý nhiều tác vụ cùng lúc? Đó là nhờ Event Loop!\n">
+<title>Event Loop trong JavaScript: Cơ Chế Bất Đồng Bộ Hoạt Động</title>
+
+<link rel='canonical' href='https://khar34.github.com/posts/event-loop-trong-javascript-co-che-bat-dong-bo-hoat-dong/'>
+
+<link rel="stylesheet" href="/scss/style.min.b9e9128fec450ebccecc4ec9900157f32b85d0609bcd5ee3293968bcaa1235f2.css"><meta property='og:title' content="Event Loop trong JavaScript: Cơ Chế Bất Đồng Bộ Hoạt Động">
+<meta property='og:description' content="Event Loop là gì?\rEvent Loop là cơ chế cốt lõi cho phép JavaScript xử lý các tác vụ bất đồng bộ mặc dù là single-threaded. Hiểu Event Loop giúp bạn nắm rõ cách JavaScript hoạt động &ldquo;dưới hood&rdquo;.\nJavaScript là Single-Threaded\rJavaScript chỉ có một thread duy nhất để thực thi code. Vậy làm sao nó có thể xử lý nhiều tác vụ cùng lúc? Đó là nhờ Event Loop!\n">
+<meta property='og:url' content='https://khar34.github.com/posts/event-loop-trong-javascript-co-che-bat-dong-bo-hoat-dong/'>
+<meta property='og:site_name' content='Khar34&#39;s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='JavaScript' /><meta property='article:tag' content='Event Loop' /><meta property='article:tag' content='Async' /><meta property='article:tag' content='CallStack' /><meta property='article:tag' content='Callback Queue' /><meta property='article:published_time' content='2025-12-25T11:30:00&#43;07:00'/><meta property='article:modified_time' content='2025-12-25T11:30:00&#43;07:00'/>
+<meta name="twitter:title" content="Event Loop trong JavaScript: Cơ Chế Bất Đồng Bộ Hoạt Động">
+<meta name="twitter:description" content="Event Loop là gì?\rEvent Loop là cơ chế cốt lõi cho phép JavaScript xử lý các tác vụ bất đồng bộ mặc dù là single-threaded. Hiểu Event Loop giúp bạn nắm rõ cách JavaScript hoạt động &ldquo;dưới hood&rdquo;.\nJavaScript là Single-Threaded\rJavaScript chỉ có một thread duy nhất để thực thi code. Vậy làm sao nó có thể xử lý nhiều tác vụ cùng lúc? Đó là nhờ Event Loop!\n">
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column compact"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_5efb6e76a8135b55.png" width="300"
+                            height="222" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Khar34&#39;s Blog</a></h1>
+            <h2 class="site-description"></h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>Dark Mode</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/javascript/" >
+                JavaScript
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/posts/event-loop-trong-javascript-co-che-bat-dong-bo-hoat-dong/">Event Loop trong JavaScript: Cơ Chế Bất Đồng Bộ Hoạt Động</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published" datetime='2025-12-25T11:30:00&#43;07:00'>Dec 25, 2025</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    5 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h2 id="event-loop-là-gì">Event Loop là gì?
+</h2><p><strong>Event Loop</strong> là cơ chế cốt lõi cho phép JavaScript xử lý các tác vụ bất đồng bộ mặc dù là single-threaded. Hiểu Event Loop giúp bạn nắm rõ cách JavaScript hoạt động &ldquo;dưới hood&rdquo;.</p>
+<h2 id="javascript-là-single-threaded">JavaScript là Single-Threaded
+</h2><p>JavaScript chỉ có <strong>một thread duy nhất</strong> để thực thi code. Vậy làm sao nó có thể xử lý nhiều tác vụ cùng lúc? Đó là nhờ Event Loop!</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;1. Đầu tiên&#39;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">setTimeout</span>(() =&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;2. Timeout&#39;</span>);
+</span></span><span style="display:flex;"><span>}, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;3. Cuối cùng&#39;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Output:
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// 1. Đầu tiên
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// 3. Cuối cùng
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// 2. Timeout (tại sao lại sau?)
+</span></span></span></code></pre></div><h2 id="các-thành-phần-của-event-loop">Các thành phần của Event Loop
+</h2><h3 id="1-call-stack-ngăn-xếp-gọi-hàm">1. Call Stack (Ngăn xếp gọi hàm)
+</h3><p>Nơi lưu trữ các hàm đang được thực thi:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">multiply</span>(<span style="color:#a6e22e">a</span>, <span style="color:#a6e22e">b</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">a</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">b</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">square</span>(<span style="color:#a6e22e">n</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">multiply</span>(<span style="color:#a6e22e">n</span>, <span style="color:#a6e22e">n</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">printSquare</span>(<span style="color:#a6e22e">n</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">result</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">square</span>(<span style="color:#a6e22e">n</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">result</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">printSquare</span>(<span style="color:#ae81ff">4</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Call Stack:
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// 1. printSquare(4)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// 2. square(4)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// 3. multiply(4, 4)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// 4. console.log(16)
+</span></span></span></code></pre></div><h3 id="2-web-apis">2. Web APIs
+</h3><p>Browser cung cấp các API để xử lý tác vụ bất đồng bộ:</p>
+<ul>
+<li><code>setTimeout()</code> / <code>setInterval()</code></li>
+<li>DOM Events</li>
+<li><code>fetch()</code> / AJAX</li>
+<li><code>Promise</code></li>
+</ul>
+<h3 id="3-callback-queue-task-queue">3. Callback Queue (Task Queue)
+</h3><p>Hàng đợi lưu các callback chờ thực thi:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#a6e22e">setTimeout</span>(() =&gt; <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;Callback 1&#39;</span>), <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">setTimeout</span>(() =&gt; <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;Callback 2&#39;</span>), <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Callback Queue: [callback1, callback2]
+</span></span></span></code></pre></div><h3 id="4-microtask-queue">4. Microtask Queue
+</h3><p>Hàng đợi ưu tiên cao hơn cho:</p>
+<ul>
+<li>Promise callbacks (<code>.then()</code>, <code>.catch()</code>)</li>
+<li><code>MutationObserver</code></li>
+<li><code>queueMicrotask()</code></li>
+</ul>
+<h2 id="cách-event-loop-hoạt-động">Cách Event Loop hoạt động
+</h2><h3 id="quy-trình">Quy trình
+</h3><ol>
+<li>Thực thi code đồng bộ trong Call Stack</li>
+<li>Khi Call Stack rỗng:
+<ul>
+<li>Kiểm tra <strong>Microtask Queue</strong> → thực thi hết</li>
+<li>Kiểm tra <strong>Callback Queue</strong> → lấy 1 callback thực thi</li>
+</ul>
+</li>
+<li>Lặp lại</li>
+</ol>
+<h3 id="ví-dụ-chi-tiết">Ví dụ chi tiết
+</h3><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;Start&#39;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">setTimeout</span>(() =&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;Timeout&#39;</span>);
+</span></span><span style="display:flex;"><span>}, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Promise.<span style="color:#a6e22e">resolve</span>()
+</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">then</span>(() =&gt; <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;Promise 1&#39;</span>))
+</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">then</span>(() =&gt; <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;Promise 2&#39;</span>));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;End&#39;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Output:
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// Start
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// End
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// Promise 1
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// Promise 2
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// Timeout
+</span></span></span></code></pre></div><p><strong>Giải thích:</strong></p>
+<ol>
+<li><code>console.log('Start')</code> → thực thi ngay</li>
+<li><code>setTimeout()</code> → gửi callback vào <strong>Callback Queue</strong></li>
+<li><code>Promise</code> → <code>.then()</code> vào <strong>Microtask Queue</strong></li>
+<li><code>console.log('End')</code> → thực thi ngay</li>
+<li>Call Stack rỗng → kiểm tra Microtask Queue:
+<ul>
+<li>Thực thi Promise 1</li>
+<li>Thực thi Promise 2</li>
+</ul>
+</li>
+<li>Microtask Queue rỗng → kiểm tra Callback Queue:
+<ul>
+<li>Thực thi Timeout</li>
+</ul>
+</li>
+</ol>
+<h2 id="macrotask-vs-microtask">Macrotask vs Microtask
+</h2><h3 id="macrotasks-tasks">Macrotasks (Tasks)
+</h3><ul>
+<li><code>setTimeout</code></li>
+<li><code>setInterval</code></li>
+<li><code>setImmediate</code> (Node.js)</li>
+<li>I/O operations</li>
+</ul>
+<h3 id="microtasks">Microtasks
+</h3><ul>
+<li><code>Promise.then/catch/finally</code></li>
+<li><code>async/await</code></li>
+<li><code>queueMicrotask()</code></li>
+<li><code>MutationObserver</code></li>
+</ul>
+<p><strong>Quy tắc:</strong> Microtasks luôn được ưu tiên thực thi trước Macrotasks!</p>
+<h3 id="ví-dụ-phức-tạp">Ví dụ phức tạp
+</h3><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;1&#39;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">setTimeout</span>(() =&gt; <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;2&#39;</span>), <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Promise.<span style="color:#a6e22e">resolve</span>()
+</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">then</span>(() =&gt; {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;3&#39;</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">setTimeout</span>(() =&gt; <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;4&#39;</span>), <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>    })
+</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">then</span>(() =&gt; <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;5&#39;</span>));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;6&#39;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Output: 1, 6, 3, 5, 2, 4
+</span></span></span></code></pre></div><p><strong>Phân tích:</strong></p>
+<ol>
+<li><code>1</code> (đồng bộ)</li>
+<li><code>6</code> (đồng bộ)</li>
+<li><code>3</code> (microtask - Promise)</li>
+<li><code>5</code> (microtask - Promise)</li>
+<li><code>2</code> (macrotask - setTimeout)</li>
+<li><code>4</code> (macrotask - setTimeout từ trong Promise)</li>
+</ol>
+<h2 id="blocking-event-loop">Blocking Event Loop
+</h2><h3 id="code-đồng-bộ-chặn-event-loop">Code đồng bộ chặn Event Loop
+</h3><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;Start&#39;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Block event loop trong 5 giây!
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">start</span> <span style="color:#f92672">=</span> Date.<span style="color:#a6e22e">now</span>();
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span> (Date.<span style="color:#a6e22e">now</span>() <span style="color:#f92672">-</span> <span style="color:#a6e22e">start</span> <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">5000</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Không làm gì
+</span></span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;End&#39;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// UI bị đóng băng trong 5 giây!
+</span></span></span></code></pre></div><h3 id="-vấn-đề">❌ Vấn đề
+</h3><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#75715e">// Click button sẽ không hoạt động ngay lập tức
+</span></span></span><span style="display:flex;"><span><span style="color:#a6e22e">button</span>.<span style="color:#a6e22e">addEventListener</span>(<span style="color:#e6db74">&#39;click&#39;</span>, () =&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;Clicked!&#39;</span>);
+</span></span><span style="display:flex;"><span>});
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Chặn event loop
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">count</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span> (<span style="color:#a6e22e">count</span> <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">1000000000</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">count</span><span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="-giải-pháp-break-thành-chunks">✅ Giải pháp: Break thành chunks
+</h3><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">processLargeArray</span>(<span style="color:#a6e22e">array</span>, <span style="color:#a6e22e">chunkSize</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">1000</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">index</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">processChunk</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">end</span> <span style="color:#f92672">=</span> Math.<span style="color:#a6e22e">min</span>(<span style="color:#a6e22e">index</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">chunkSize</span>, <span style="color:#a6e22e">array</span>.<span style="color:#a6e22e">length</span>);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (; <span style="color:#a6e22e">index</span> <span style="color:#f92672">&lt;</span> <span style="color:#a6e22e">end</span>; <span style="color:#a6e22e">index</span><span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// Process item
+</span></span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">processItem</span>(<span style="color:#a6e22e">array</span>[<span style="color:#a6e22e">index</span>]);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">index</span> <span style="color:#f92672">&lt;</span> <span style="color:#a6e22e">array</span>.<span style="color:#a6e22e">length</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">setTimeout</span>(<span style="color:#a6e22e">processChunk</span>, <span style="color:#ae81ff">0</span>); <span style="color:#75715e">// Cho Event Loop breathe
+</span></span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">processChunk</span>();
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="ví-dụ-thực-tế">Ví dụ thực tế
+</h2><h3 id="1-animation-smooth">1. Animation smooth
+</h3><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">animate</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Update animation
+</span></span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">updatePosition</span>();
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Không block event loop
+</span></span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">requestAnimationFrame</span>(<span style="color:#a6e22e">animate</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">animate</span>();
+</span></span></code></pre></div><h3 id="2-debouncing-với-event-loop">2. Debouncing với Event Loop
+</h3><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">debounce</span>(<span style="color:#a6e22e">func</span>, <span style="color:#a6e22e">delay</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">timeoutId</span>;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">function</span>(...<span style="color:#a6e22e">args</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">clearTimeout</span>(<span style="color:#a6e22e">timeoutId</span>);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">timeoutId</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">setTimeout</span>(() =&gt; {
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">func</span>.<span style="color:#a6e22e">apply</span>(<span style="color:#66d9ef">this</span>, <span style="color:#a6e22e">args</span>);
+</span></span><span style="display:flex;"><span>        }, <span style="color:#a6e22e">delay</span>);
+</span></span><span style="display:flex;"><span>    };
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Sử dụng
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">handleSearch</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">debounce</span>((<span style="color:#a6e22e">query</span>) =&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;Searching for:&#39;</span>, <span style="color:#a6e22e">query</span>);
+</span></span><span style="display:flex;"><span>}, <span style="color:#ae81ff">300</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">searchInput</span>.<span style="color:#a6e22e">addEventListener</span>(<span style="color:#e6db74">&#39;input&#39;</span>, (<span style="color:#a6e22e">e</span>) =&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">handleSearch</span>(<span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">target</span>.<span style="color:#a6e22e">value</span>);
+</span></span><span style="display:flex;"><span>});
+</span></span></code></pre></div><h3 id="3-load-data-không-block-ui">3. Load data không block UI
+</h3><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">async</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">loadUserData</span>(<span style="color:#a6e22e">userId</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Show loading
+</span></span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">showSpinner</span>();
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Không block UI vì await release event loop
+</span></span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">user</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">fetch</span>(<span style="color:#e6db74">`/api/users/</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">userId</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>).<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">r</span> =&gt; <span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">json</span>());
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">orders</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">fetch</span>(<span style="color:#e6db74">`/api/orders/</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">userId</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>).<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">r</span> =&gt; <span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">json</span>());
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">displayUserData</span>(<span style="color:#a6e22e">user</span>, <span style="color:#a6e22e">orders</span>);
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">finally</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">hideSpinner</span>();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="4-priority-queue-với-queuemicrotask">4. Priority Queue với queueMicrotask
+</h3><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;1&#39;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">queueMicrotask</span>(() =&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;2 - High priority&#39;</span>);
+</span></span><span style="display:flex;"><span>});
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">setTimeout</span>(() =&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;3 - Low priority&#39;</span>);
+</span></span><span style="display:flex;"><span>}, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Promise.<span style="color:#a6e22e">resolve</span>().<span style="color:#a6e22e">then</span>(() =&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;4 - High priority&#39;</span>);
+</span></span><span style="display:flex;"><span>});
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;5&#39;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Output: 1, 5, 2, 4, 3
+</span></span></span></code></pre></div><h2 id="asyncawait-và-event-loop">Async/Await và Event Loop
+</h2><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">async</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">example</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;1&#39;</span>);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">await</span> Promise.<span style="color:#a6e22e">resolve</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;2&#39;</span>); <span style="color:#75715e">// Microtask
+</span></span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">await</span> Promise.<span style="color:#a6e22e">resolve</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;3&#39;</span>); <span style="color:#75715e">// Microtask
+</span></span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;Start&#39;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">example</span>();
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;End&#39;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Output: Start, 1, End, 2, 3
+</span></span></span></code></pre></div><p><strong>Giải thích:</strong> Mỗi <code>await</code> tạo một microtask mới.</p>
+<h2 id="setimmediate-vs-settimeout-nodejs">setImmediate vs setTimeout (Node.js)
+</h2><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#75715e">// Node.js
+</span></span></span><span style="display:flex;"><span><span style="color:#a6e22e">setTimeout</span>(() =&gt; <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;timeout&#39;</span>), <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">setImmediate</span>(() =&gt; <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;immediate&#39;</span>));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Output không xác định!
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// Có thể là: timeout, immediate HOẶC immediate, timeout
+</span></span></span></code></pre></div><p><strong>Trong I/O cycle:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">fs</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;fs&#39;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fs</span>.<span style="color:#a6e22e">readFile</span>(<span style="color:#e6db74">&#39;file.txt&#39;</span>, () =&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">setTimeout</span>(() =&gt; <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;timeout&#39;</span>), <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">setImmediate</span>(() =&gt; <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;immediate&#39;</span>));
+</span></span><span style="display:flex;"><span>});
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Output: immediate, timeout (xác định!)
+</span></span></span></code></pre></div><h2 id="best-practices">Best Practices
+</h2><h3 id="1-tránh-blocking-code">1. Tránh blocking code
+</h3><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#75715e">// ❌ BAD
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">processData</span>(<span style="color:#a6e22e">largeArray</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">largeArray</span>.<span style="color:#a6e22e">forEach</span>(<span style="color:#a6e22e">item</span> =&gt; {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Heavy processing
+</span></span></span><span style="display:flex;"><span>    });
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// ✅ GOOD
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">async</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">processData</span>(<span style="color:#a6e22e">largeArray</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">item</span> <span style="color:#66d9ef">of</span> <span style="color:#a6e22e">largeArray</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">processItem</span>(<span style="color:#a6e22e">item</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Cho event loop breathe sau mỗi item
+</span></span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="2-hiểu-thứ-tự-ưu-tiên">2. Hiểu thứ tự ưu tiên
+</h3><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#75715e">// Microtask &gt; Macrotask
+</span></span></span><span style="display:flex;"><span>Promise.<span style="color:#a6e22e">resolve</span>().<span style="color:#a6e22e">then</span>(() =&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Chạy trước
+</span></span></span><span style="display:flex;"><span>});
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">setTimeout</span>(() =&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Chạy sau
+</span></span></span><span style="display:flex;"><span>}, <span style="color:#ae81ff">0</span>);
+</span></span></code></pre></div><h3 id="3-sử-dụng-requestanimationframe-cho-animation">3. Sử dụng requestAnimationFrame cho animation
+</h3><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#75715e">// ✅ Smooth animation
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">animate</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">updateElement</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">requestAnimationFrame</span>(<span style="color:#a6e22e">animate</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// ❌ Có thể lag
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">animate</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">updateElement</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">setTimeout</span>(<span style="color:#a6e22e">animate</span>, <span style="color:#ae81ff">16</span>); <span style="color:#75715e">// 60fps
+</span></span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="4-break-heavy-tasks">4. Break heavy tasks
+</h3><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">function</span><span style="color:#f92672">*</span> <span style="color:#a6e22e">heavyTask</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">1000000</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">yield</span> <span style="color:#a6e22e">processItem</span>(<span style="color:#a6e22e">i</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">async</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">runTask</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">task</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">heavyTask</span>();
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">item</span> <span style="color:#66d9ef">of</span> <span style="color:#a6e22e">task</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">shouldPause</span>()) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">await</span> <span style="color:#66d9ef">new</span> Promise(<span style="color:#a6e22e">resolve</span> =&gt; <span style="color:#a6e22e">setTimeout</span>(<span style="color:#a6e22e">resolve</span>, <span style="color:#ae81ff">0</span>));
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="kết-luận">Kết luận
+</h2><p>Event Loop là trái tim của JavaScript:</p>
+<ul>
+<li>Cho phép xử lý bất đồng bộ trên single thread</li>
+<li>Microtasks có priority cao hơn Macrotasks</li>
+<li>Hiểu Event Loop giúp viết code performance tốt</li>
+<li>Tránh blocking Event Loop để UI mượt mà</li>
+</ul>
+<p>Nắm vững Event Loop là bước quan trọng để trở thành JavaScript developer chuyên nghiệp!</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/javascript/">JavaScript</a>
+        
+            <a href="/tags/event-loop/">Event Loop</a>
+        
+            <a href="/tags/async/">Async</a>
+        
+            <a href="/tags/callstack/">CallStack</a>
+        
+            <a href="/tags/callback-queue/">Callback Queue</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">Related content</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/posts/promises-trong-javascript-xu-ly-bat-dong-bo-hieu-qua/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Promises trong JavaScript: Xử Lý Bất Đồng Bộ Hiệu Quả</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2025 Khar34&#39;s Blog
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.33.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+    
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.c922af694cc257bf1ecc41c0dd7b0430f9114ec280ccf67cd2c6ad55f5316c4e.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

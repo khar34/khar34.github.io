@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="Exception là gì?\rException (ngoại lệ) là sự kiện bất thường xảy ra trong quá trình thực thi chương trình, làm gián đoạn luồng code bình thường. Java cung cấp cơ chế mạnh mẽ để xử lý exceptions một cách có cấu trúc.\nPhân loại Exception trong Java\r1. Checked Exception\rExceptions được kiểm tra tại compile-time, bắt buộc phải xử lý:\n// Phải xử lý IOException public void readFile(String path) throws IOException { FileReader file = new FileReader(path); BufferedReader reader = new BufferedReader(file); // ... } Ví dụ: IOException, SQLException, ClassNotFoundException\n">
+<title>Exception Handling trong Java: Xử Lý Lỗi Chuyên Nghiệp</title>
+
+<link rel='canonical' href='https://khar34.github.com/posts/exception-handling-trong-java-xu-ly-loi-chuyen-nghiep/'>
+
+<link rel="stylesheet" href="/scss/style.min.b9e9128fec450ebccecc4ec9900157f32b85d0609bcd5ee3293968bcaa1235f2.css"><meta property='og:title' content="Exception Handling trong Java: Xử Lý Lỗi Chuyên Nghiệp">
+<meta property='og:description' content="Exception là gì?\rException (ngoại lệ) là sự kiện bất thường xảy ra trong quá trình thực thi chương trình, làm gián đoạn luồng code bình thường. Java cung cấp cơ chế mạnh mẽ để xử lý exceptions một cách có cấu trúc.\nPhân loại Exception trong Java\r1. Checked Exception\rExceptions được kiểm tra tại compile-time, bắt buộc phải xử lý:\n// Phải xử lý IOException public void readFile(String path) throws IOException { FileReader file = new FileReader(path); BufferedReader reader = new BufferedReader(file); // ... } Ví dụ: IOException, SQLException, ClassNotFoundException\n">
+<meta property='og:url' content='https://khar34.github.com/posts/exception-handling-trong-java-xu-ly-loi-chuyen-nghiep/'>
+<meta property='og:site_name' content='Khar34&#39;s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='Java' /><meta property='article:tag' content='Exception' /><meta property='article:tag' content='Error Handling' /><meta property='article:tag' content='Try-Catch' /><meta property='article:tag' content='Best Practices' /><meta property='article:published_time' content='2025-12-25T11:00:00&#43;07:00'/><meta property='article:modified_time' content='2025-12-25T11:00:00&#43;07:00'/>
+<meta name="twitter:title" content="Exception Handling trong Java: Xử Lý Lỗi Chuyên Nghiệp">
+<meta name="twitter:description" content="Exception là gì?\rException (ngoại lệ) là sự kiện bất thường xảy ra trong quá trình thực thi chương trình, làm gián đoạn luồng code bình thường. Java cung cấp cơ chế mạnh mẽ để xử lý exceptions một cách có cấu trúc.\nPhân loại Exception trong Java\r1. Checked Exception\rExceptions được kiểm tra tại compile-time, bắt buộc phải xử lý:\n// Phải xử lý IOException public void readFile(String path) throws IOException { FileReader file = new FileReader(path); BufferedReader reader = new BufferedReader(file); // ... } Ví dụ: IOException, SQLException, ClassNotFoundException\n">
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column compact"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_5efb6e76a8135b55.png" width="300"
+                            height="222" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Khar34&#39;s Blog</a></h1>
+            <h2 class="site-description"></h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>Dark Mode</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/java/" >
+                Java
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/posts/exception-handling-trong-java-xu-ly-loi-chuyen-nghiep/">Exception Handling trong Java: Xử Lý Lỗi Chuyên Nghiệp</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published" datetime='2025-12-25T11:00:00&#43;07:00'>Dec 25, 2025</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    6 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h2 id="exception-là-gì">Exception là gì?
+</h2><p><strong>Exception</strong> (ngoại lệ) là sự kiện bất thường xảy ra trong quá trình thực thi chương trình, làm gián đoạn luồng code bình thường. Java cung cấp cơ chế mạnh mẽ để xử lý exceptions một cách có cấu trúc.</p>
+<h2 id="phân-loại-exception-trong-java">Phân loại Exception trong Java
+</h2><h3 id="1-checked-exception">1. Checked Exception
+</h3><p>Exceptions được kiểm tra tại compile-time, <strong>bắt buộc</strong> phải xử lý:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#75715e">// Phải xử lý IOException</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">readFile</span>(String path) <span style="color:#66d9ef">throws</span> IOException {
+</span></span><span style="display:flex;"><span>    FileReader file <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> FileReader(path);
+</span></span><span style="display:flex;"><span>    BufferedReader reader <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> BufferedReader(file);
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// ...</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Ví dụ: <code>IOException</code>, <code>SQLException</code>, <code>ClassNotFoundException</code></p>
+<h3 id="2-unchecked-exception-runtime-exception">2. Unchecked Exception (Runtime Exception)
+</h3><p>Exceptions xảy ra tại runtime, <strong>không bắt buộc</strong> xử lý:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> arr <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">int</span><span style="color:#f92672">[</span>5<span style="color:#f92672">]</span>;
+</span></span><span style="display:flex;"><span>arr<span style="color:#f92672">[</span>10<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> 50; <span style="color:#75715e">// ArrayIndexOutOfBoundsException</span>
+</span></span></code></pre></div><p>Ví dụ: <code>NullPointerException</code>, <code>ArrayIndexOutOfBoundsException</code>, <code>ArithmeticException</code></p>
+<h3 id="3-error">3. Error
+</h3><p>Lỗi nghiêm trọng, thường không nên xử lý:</p>
+<ul>
+<li><code>OutOfMemoryError</code></li>
+<li><code>StackOverflowError</code></li>
+</ul>
+<h2 id="cú-pháp-try-catch-finally">Cú pháp Try-Catch-Finally
+</h2><h3 id="cơ-bản">Cơ bản
+</h3><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Code có thể gây exception</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> result <span style="color:#f92672">=</span> 10 <span style="color:#f92672">/</span> 0;
+</span></span><span style="display:flex;"><span>} <span style="color:#66d9ef">catch</span> (ArithmeticException e) {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Xử lý lỗi</span>
+</span></span><span style="display:flex;"><span>    System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Không thể chia cho 0: &#34;</span> <span style="color:#f92672">+</span> e.<span style="color:#a6e22e">getMessage</span>());
+</span></span><span style="display:flex;"><span>} <span style="color:#66d9ef">finally</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Luôn được thực thi</span>
+</span></span><span style="display:flex;"><span>    System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Cleanup code&#34;</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="multiple-catch-blocks">Multiple Catch Blocks
+</h3><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>    String str <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>    System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(str.<span style="color:#a6e22e">length</span>());
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> result <span style="color:#f92672">=</span> 10 <span style="color:#f92672">/</span> 0;
+</span></span><span style="display:flex;"><span>} <span style="color:#66d9ef">catch</span> (NullPointerException e) {
+</span></span><span style="display:flex;"><span>    System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Null pointer: &#34;</span> <span style="color:#f92672">+</span> e.<span style="color:#a6e22e">getMessage</span>());
+</span></span><span style="display:flex;"><span>} <span style="color:#66d9ef">catch</span> (ArithmeticException e) {
+</span></span><span style="display:flex;"><span>    System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Arithmetic error: &#34;</span> <span style="color:#f92672">+</span> e.<span style="color:#a6e22e">getMessage</span>());
+</span></span><span style="display:flex;"><span>} <span style="color:#66d9ef">catch</span> (Exception e) {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Catch tổng quát - đặt cuối cùng</span>
+</span></span><span style="display:flex;"><span>    System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;General error: &#34;</span> <span style="color:#f92672">+</span> e.<span style="color:#a6e22e">getMessage</span>());
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="multi-catch-java-7">Multi-catch (Java 7+)
+</h3><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Code</span>
+</span></span><span style="display:flex;"><span>} <span style="color:#66d9ef">catch</span> (IOException <span style="color:#f92672">|</span> SQLException e) {
+</span></span><span style="display:flex;"><span>    System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;IO hoặc SQL error: &#34;</span> <span style="color:#f92672">+</span> e.<span style="color:#a6e22e">getMessage</span>());
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="try-with-resources-java-7">Try-with-Resources (Java 7+)
+</h2><p>Tự động đóng resources, không cần finally:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#75715e">// Cách cũ</span>
+</span></span><span style="display:flex;"><span>BufferedReader reader <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>    reader <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> BufferedReader(<span style="color:#66d9ef">new</span> FileReader(<span style="color:#e6db74">&#34;file.txt&#34;</span>));
+</span></span><span style="display:flex;"><span>    String line <span style="color:#f92672">=</span> reader.<span style="color:#a6e22e">readLine</span>();
+</span></span><span style="display:flex;"><span>} <span style="color:#66d9ef">catch</span> (IOException e) {
+</span></span><span style="display:flex;"><span>    e.<span style="color:#a6e22e">printStackTrace</span>();
+</span></span><span style="display:flex;"><span>} <span style="color:#66d9ef">finally</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (reader <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>            reader.<span style="color:#a6e22e">close</span>();
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">catch</span> (IOException e) {
+</span></span><span style="display:flex;"><span>            e.<span style="color:#a6e22e">printStackTrace</span>();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Cách mới (Java 7+)</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">try</span> (BufferedReader reader <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> BufferedReader(<span style="color:#66d9ef">new</span> FileReader(<span style="color:#e6db74">&#34;file.txt&#34;</span>))) {
+</span></span><span style="display:flex;"><span>    String line <span style="color:#f92672">=</span> reader.<span style="color:#a6e22e">readLine</span>();
+</span></span><span style="display:flex;"><span>} <span style="color:#66d9ef">catch</span> (IOException e) {
+</span></span><span style="display:flex;"><span>    e.<span style="color:#a6e22e">printStackTrace</span>();
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><strong>Lợi ích:</strong></p>
+<ul>
+<li>Code ngắn gọn hơn</li>
+<li>Tự động close() resources</li>
+<li>Không bị resource leak</li>
+</ul>
+<h3 id="multiple-resources">Multiple Resources
+</h3><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">try</span> (FileInputStream fis <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> FileInputStream(<span style="color:#e6db74">&#34;input.txt&#34;</span>);
+</span></span><span style="display:flex;"><span>     FileOutputStream fos <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> FileOutputStream(<span style="color:#e6db74">&#34;output.txt&#34;</span>)) {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Sử dụng cả 2 streams</span>
+</span></span><span style="display:flex;"><span>} <span style="color:#66d9ef">catch</span> (IOException e) {
+</span></span><span style="display:flex;"><span>    e.<span style="color:#a6e22e">printStackTrace</span>();
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="throws-và-throw">Throws và Throw
+</h2><h3 id="throws---khai-báo-exception">throws - Khai báo exception
+</h3><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">readFile</span>(String path) <span style="color:#66d9ef">throws</span> IOException, FileNotFoundException {
+</span></span><span style="display:flex;"><span>    FileReader file <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> FileReader(path);
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// ...</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="throw---ném-exception">throw - Ném exception
+</h3><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setAge</span>(<span style="color:#66d9ef">int</span> age) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (age <span style="color:#f92672">&lt;</span> 0) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> IllegalArgumentException(<span style="color:#e6db74">&#34;Tuổi không thể âm!&#34;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">age</span> <span style="color:#f92672">=</span> age;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="custom-exception">Custom Exception
+</h2><h3 id="tạo-exception-riêng">Tạo Exception riêng
+</h3><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">InsufficientBalanceException</span> <span style="color:#66d9ef">extends</span> Exception {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">double</span> amount;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">InsufficientBalanceException</span>(<span style="color:#66d9ef">double</span> amount) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">super</span>(<span style="color:#e6db74">&#34;Số dư không đủ: thiếu &#34;</span> <span style="color:#f92672">+</span> amount);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">amount</span> <span style="color:#f92672">=</span> amount;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">double</span> <span style="color:#a6e22e">getAmount</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> amount;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="sử-dụng-custom-exception">Sử dụng Custom Exception
+</h3><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">BankAccount</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">double</span> balance;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">withdraw</span>(<span style="color:#66d9ef">double</span> amount) <span style="color:#66d9ef">throws</span> InsufficientBalanceException {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (amount <span style="color:#f92672">&gt;</span> balance) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> InsufficientBalanceException(amount <span style="color:#f92672">-</span> balance);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        balance <span style="color:#f92672">-=</span> amount;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Sử dụng</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>    account.<span style="color:#a6e22e">withdraw</span>(1000);
+</span></span><span style="display:flex;"><span>} <span style="color:#66d9ef">catch</span> (InsufficientBalanceException e) {
+</span></span><span style="display:flex;"><span>    System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(e.<span style="color:#a6e22e">getMessage</span>());
+</span></span><span style="display:flex;"><span>    System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Thiếu: &#34;</span> <span style="color:#f92672">+</span> e.<span style="color:#a6e22e">getAmount</span>());
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="exception-propagation">Exception Propagation
+</h2><p>Exception được lan truyền lên call stack:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ExceptionPropagation</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">method1</span>() {
+</span></span><span style="display:flex;"><span>        method2();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">method2</span>() {
+</span></span><span style="display:flex;"><span>        method3();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">method3</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> RuntimeException(<span style="color:#e6db74">&#34;Lỗi ở method3&#34;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span> args) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">new</span> ExceptionPropagation().<span style="color:#a6e22e">method1</span>();
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">catch</span> (Exception e) {
+</span></span><span style="display:flex;"><span>            e.<span style="color:#a6e22e">printStackTrace</span>();
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// Stack trace sẽ hiển thị: method3 -&gt; method2 -&gt; method1 -&gt; main</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="best-practices">Best Practices
+</h2><h3 id="1-đừng-nuốt-exception">1. Đừng nuốt exception
+</h3><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#75715e">// ❌ SỬA: Không làm thế này</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>    riskyOperation();
+</span></span><span style="display:flex;"><span>} <span style="color:#66d9ef">catch</span> (Exception e) {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Không làm gì - exception bị &#34;nuốt&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// ✅ TỐT: Ít nhất log lại</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>    riskyOperation();
+</span></span><span style="display:flex;"><span>} <span style="color:#66d9ef">catch</span> (Exception e) {
+</span></span><span style="display:flex;"><span>    logger.<span style="color:#a6e22e">error</span>(<span style="color:#e6db74">&#34;Error during risky operation&#34;</span>, e);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="2-catch-exception-cụ-thể">2. Catch exception cụ thể
+</h3><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#75715e">// ❌ SỬA</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// code</span>
+</span></span><span style="display:flex;"><span>} <span style="color:#66d9ef">catch</span> (Exception e) {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Quá chung chung</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// ✅ TỐT</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// code</span>
+</span></span><span style="display:flex;"><span>} <span style="color:#66d9ef">catch</span> (IOException e) {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Xử lý IO error cụ thể</span>
+</span></span><span style="display:flex;"><span>} <span style="color:#66d9ef">catch</span> (SQLException e) {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Xử lý SQL error cụ thể</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="3-đóng-resources-đúng-cách">3. Đóng resources đúng cách
+</h3><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#75715e">// ❌ SỬA: Dùng finally thủ công</span>
+</span></span><span style="display:flex;"><span>FileInputStream fis <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>    fis <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> FileInputStream(<span style="color:#e6db74">&#34;file.txt&#34;</span>);
+</span></span><span style="display:flex;"><span>} <span style="color:#66d9ef">finally</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (fis <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span>) fis.<span style="color:#a6e22e">close</span>();
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// ✅ TỐT: Dùng try-with-resources</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">try</span> (FileInputStream fis <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> FileInputStream(<span style="color:#e6db74">&#34;file.txt&#34;</span>)) {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// code</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="4-exception-message-rõ-ràng">4. Exception message rõ ràng
+</h3><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#75715e">// ❌ SỬA</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> IllegalArgumentException(<span style="color:#e6db74">&#34;Invalid&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// ✅ TỐT</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> IllegalArgumentException(
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;Invalid age value: &#34;</span> <span style="color:#f92672">+</span> age <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;. Age must be between 0 and 150&#34;</span>
+</span></span><span style="display:flex;"><span>);
+</span></span></code></pre></div><h3 id="5-không-dùng-exception-để-control-flow">5. Không dùng exception để control flow
+</h3><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#75715e">// ❌ SỬA: Dùng exception như control flow</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> (<span style="color:#66d9ef">true</span>) {
+</span></span><span style="display:flex;"><span>        array<span style="color:#f92672">[</span>i<span style="color:#f92672">++]</span> <span style="color:#f92672">=</span> getValue();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>} <span style="color:#66d9ef">catch</span> (ArrayIndexOutOfBoundsException e) {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Xong rồi</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// ✅ TỐT: Dùng điều kiện bình thường</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0; i <span style="color:#f92672">&lt;</span> array.<span style="color:#a6e22e">length</span>; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    array<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> getValue();
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="6-log-với-context-đầy-đủ">6. Log với context đầy đủ
+</h3><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>    processPayment(userId, amount);
+</span></span><span style="display:flex;"><span>} <span style="color:#66d9ef">catch</span> (PaymentException e) {
+</span></span><span style="display:flex;"><span>    logger.<span style="color:#a6e22e">error</span>(
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;Payment failed for user: {} with amount: {}&#34;</span>, 
+</span></span><span style="display:flex;"><span>        userId, 
+</span></span><span style="display:flex;"><span>        amount, 
+</span></span><span style="display:flex;"><span>        e
+</span></span><span style="display:flex;"><span>    );
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">throw</span> e;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="ví-dụ-thực-tế">Ví dụ thực tế
+</h2><h3 id="1-service-layer-với-exception-handling">1. Service Layer với Exception Handling
+</h3><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@Service</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UserService</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> UserRepository userRepository;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> User <span style="color:#a6e22e">getUserById</span>(Long id) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> userRepository.<span style="color:#a6e22e">findById</span>(id)
+</span></span><span style="display:flex;"><span>            .<span style="color:#a6e22e">orElseThrow</span>(() <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">new</span> UserNotFoundException(<span style="color:#e6db74">&#34;User not found: &#34;</span> <span style="color:#f92672">+</span> id));
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> User <span style="color:#a6e22e">createUser</span>(UserDTO dto) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>            validateUser(dto);
+</span></span><span style="display:flex;"><span>            User user <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> User(dto.<span style="color:#a6e22e">getName</span>(), dto.<span style="color:#a6e22e">getEmail</span>());
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> userRepository.<span style="color:#a6e22e">save</span>(user);
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">catch</span> (ValidationException e) {
+</span></span><span style="display:flex;"><span>            logger.<span style="color:#a6e22e">error</span>(<span style="color:#e6db74">&#34;Validation failed for user: {}&#34;</span>, dto, e);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> BadRequestException(e.<span style="color:#a6e22e">getMessage</span>());
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">catch</span> (DataAccessException e) {
+</span></span><span style="display:flex;"><span>            logger.<span style="color:#a6e22e">error</span>(<span style="color:#e6db74">&#34;Database error creating user: {}&#34;</span>, dto, e);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> ServiceException(<span style="color:#e6db74">&#34;Unable to create user&#34;</span>, e);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="2-rest-controller-với-exception-handling">2. REST Controller với Exception Handling
+</h3><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@RestController</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@RequestMapping</span>(<span style="color:#e6db74">&#34;/api/users&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UserController</span> {
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@GetMapping</span>(<span style="color:#e6db74">&#34;/{id}&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> ResponseEntity<span style="color:#f92672">&lt;</span>User<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">getUser</span>(<span style="color:#a6e22e">@PathVariable</span> Long id) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>            User user <span style="color:#f92672">=</span> userService.<span style="color:#a6e22e">getUserById</span>(id);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> ResponseEntity.<span style="color:#a6e22e">ok</span>(user);
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">catch</span> (UserNotFoundException e) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> ResponseEntity.<span style="color:#a6e22e">notFound</span>().<span style="color:#a6e22e">build</span>();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@ExceptionHandler</span>(UserNotFoundException.<span style="color:#a6e22e">class</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> ResponseEntity<span style="color:#f92672">&lt;</span>ErrorResponse<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">handleUserNotFound</span>(UserNotFoundException e) {
+</span></span><span style="display:flex;"><span>        ErrorResponse error <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ErrorResponse(
+</span></span><span style="display:flex;"><span>            HttpStatus.<span style="color:#a6e22e">NOT_FOUND</span>.<span style="color:#a6e22e">value</span>(),
+</span></span><span style="display:flex;"><span>            e.<span style="color:#a6e22e">getMessage</span>(),
+</span></span><span style="display:flex;"><span>            LocalDateTime.<span style="color:#a6e22e">now</span>()
+</span></span><span style="display:flex;"><span>        );
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ResponseEntity.<span style="color:#a6e22e">status</span>(HttpStatus.<span style="color:#a6e22e">NOT_FOUND</span>).<span style="color:#a6e22e">body</span>(error);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="3-retry-với-exception">3. Retry với Exception
+</h3><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> T <span style="color:#a6e22e">executeWithRetry</span>(Supplier<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> operation, <span style="color:#66d9ef">int</span> maxRetries) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> attempts <span style="color:#f92672">=</span> 0;
+</span></span><span style="display:flex;"><span>    Exception lastException <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> (attempts <span style="color:#f92672">&lt;</span> maxRetries) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> operation.<span style="color:#a6e22e">get</span>();
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">catch</span> (Exception e) {
+</span></span><span style="display:flex;"><span>            lastException <span style="color:#f92672">=</span> e;
+</span></span><span style="display:flex;"><span>            attempts<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>            logger.<span style="color:#a6e22e">warn</span>(<span style="color:#e6db74">&#34;Attempt {} failed, retrying...&#34;</span>, attempts);
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (attempts <span style="color:#f92672">&lt;</span> maxRetries) {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>                    Thread.<span style="color:#a6e22e">sleep</span>(1000 <span style="color:#f92672">*</span> attempts); <span style="color:#75715e">// Exponential backoff</span>
+</span></span><span style="display:flex;"><span>                } <span style="color:#66d9ef">catch</span> (InterruptedException ie) {
+</span></span><span style="display:flex;"><span>                    Thread.<span style="color:#a6e22e">currentThread</span>().<span style="color:#a6e22e">interrupt</span>();
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> RuntimeException(ie);
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> RuntimeException(<span style="color:#e6db74">&#34;Failed after &#34;</span> <span style="color:#f92672">+</span> maxRetries <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; attempts&#34;</span>, lastException);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="kết-luận">Kết luận
+</h2><p>Exception handling là kỹ năng quan trọng trong Java:</p>
+<ul>
+<li>Hiểu rõ checked vs unchecked exceptions</li>
+<li>Sử dụng try-with-resources cho resource management</li>
+<li>Tạo custom exceptions khi cần</li>
+<li>Follow best practices để code dễ maintain</li>
+<li>Log exceptions đầy đủ context</li>
+</ul>
+<p>Xử lý exception đúng cách giúp ứng dụng robust và dễ debug hơn!</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/java/">Java</a>
+        
+            <a href="/tags/exception/">Exception</a>
+        
+            <a href="/tags/error-handling/">Error Handling</a>
+        
+            <a href="/tags/try-catch/">Try-Catch</a>
+        
+            <a href="/tags/best-practices/">Best Practices</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">Related content</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/posts/dependency-injection-trong-java-hieu-va-ap-dung/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Dependency Injection trong Java: Hiểu và Áp Dụng</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2025 Khar34&#39;s Blog
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.33.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+    
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.c922af694cc257bf1ecc41c0dd7b0430f9114ec280ccf67cd2c6ad55f5316c4e.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
