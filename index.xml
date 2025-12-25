@@ -2,9 +2,9 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>Khar34&#39;s Blog</title>
-        <link>https://khar34.github.com/</link>
+        <link>https://khar34.github.com/posts/</link>
         <description>Recent content on Khar34&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator>
-        <language>en-us</language><atom:link href="https://khar34.github.com/index.xml" rel="self" type="application/rss+xml" />
+        <language>en-us</language><atom:link href="https://khar34.github.com/posts/index.xml" rel="self" type="application/rss+xml" />
     </channel>
 </rss>
